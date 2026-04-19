@@ -1,0 +1,2605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ways of Thinking — Interactive Visualization Research Hub</title>
+<meta name="description" content="A reference library of explorable explanations, narrative visualization, knowledge graphs, and the tools to build them.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<canvas id="starfield"></canvas>
+
+<!-- =========================================================
+     SIDEBAR NAVIGATION
+     ========================================================= -->
+<aside class="sidebar">
+  <div class="brand-row">
+    <div class="brand-text">
+      <div class="brand">Ways of Thinking</div>
+      <span class="brand-sub">A reference for interactive ideas</span>
+    </div>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="#intro"><span class="num">00</span>Introduction</a></li>
+      <li><a href="#explorables"><span class="num">01</span>Explorable Explanations</a></li>
+      <li><a href="#narrative"><span class="num">02</span>Narrative &amp; Scrolly</a></li>
+      <li><a href="#reactive"><span class="num">03</span>Reactive Documents</a></li>
+      <li><a href="#graphs"><span class="num">04</span>Knowledge Graphs</a></li>
+      <li><a href="#embeddings"><span class="num">05</span>Embedding Spaces</a></li>
+      <li><a href="#canvas"><span class="num">06</span>Canvas &amp; Spatial</a></li>
+      <li><a href="#simulations"><span class="num">07</span>Simulations</a></li>
+      <li><a href="#zoom"><span class="num">08</span>Zoom &amp; Multi-scale</a></li>
+      <li><a href="#scale"><span class="num">09</span>Sense-of-Scale</a></li>
+      <li><a href="#art"><span class="num">10</span>Data Art</a></li>
+      <li><a href="#tools"><span class="num">11</span>Research Tools</a></li>
+      <li><a href="#libraries"><span class="num">12</span>Libraries</a></li>
+      <li><a href="#principles"><span class="num">13</span>Concepts</a></li>
+      <li><a href="#build"><span class="num">14</span>Your Build</a></li>
+    </ul>
+  </nav>
+  <div class="sidebar-footer">
+    Assembled for Douglas McGowan<br>
+    UC Berkeley Research, April 2026<br>
+    <br>
+    14 sections · ~200 linked sources<br>
+    Every example is clickable.
+  </div>
+</aside>
+
+<!-- =========================================================
+     MAIN CONTENT
+     ========================================================= -->
+<main>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="container">
+    <span class="hero-eyebrow">A research hub on interactive visualization</span>
+    <h1>Ways of <em>Thinking</em><br>Through Things</h1>
+    <p class="hero-lede">
+      An illustrated field guide to explorable explanations, narrative visualization, knowledge graphs, and the
+      other formats people have invented for making ideas legible. Every section names the genre, shows the
+      canonical examples, names the techniques, and points to the tools.
+    </p>
+    <dl class="hero-meta">
+      <div>
+        <dt>Purpose</dt>
+        <dd>Reference library for building a personal research-mapping tool — a universe you can zoom into.</dd>
+      </div>
+      <div>
+        <dt>How to read</dt>
+        <dd>Scroll top-to-bottom, or jump in via the sidebar. Each card is a live link. Expand a <code>+</code> to dig deeper.</dd>
+      </div>
+      <div>
+        <dt>What&rsquo;s at the end</dt>
+        <dd>§14 — twelve concrete paths for building the 4-level zoom tool, with honest tradeoffs for each.</dd>
+      </div>
+    </dl>
+  </div>
+</header>
+
+<!-- =========================================================
+     00 · INTRODUCTION
+     ========================================================= -->
+<section id="intro">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">00 · Introduction</span>
+      <h2>The question behind this site</h2>
+      <p class="section-lede">
+        How do you arrange a body of thought — papers, ideas, people, talks, half-formed notes — so that it
+        stays thinkable as it grows? This document collects everything humans have tried: reactive prose,
+        scroll-driven essays, force-directed graphs, embedding galaxies, infinite canvases, explorable
+        simulations, and the zoomable-universe metaphor that underlies the richest of these tools.
+      </p>
+    </div>
+
+    <p>
+      Three questions shape the sections below:
+    </p>
+    <ul style="list-style: none; padding-left: 0; margin: 1.5rem 0;">
+      <li style="padding: 0.75rem 0; border-bottom: 1px solid var(--border);">
+        <strong class="accent">How do we explain</strong> — essays that react to a reader's manipulations,
+        simulations that you play with to understand, reactive numbers that cascade through prose.
+      </li>
+      <li style="padding: 0.75rem 0; border-bottom: 1px solid var(--border);">
+        <strong class="cyan">How do we explore</strong> — graphs, maps, embedding spaces, infinite canvases,
+        and semantic zoom across multiple levels of aggregation.
+      </li>
+      <li style="padding: 0.75rem 0;">
+        <strong class="magenta">How do we communicate</strong> — visual essays, scrollytelling, narrative
+        martini-glasses, and the aesthetic traditions of data art.
+      </li>
+    </ul>
+
+    <div class="callout">
+      <div class="callout-title">The four-level vision driving this</div>
+      <p>
+        The tool you&rsquo;re imagining has four zoom tiers. Each tier is a different kind of interface, but
+        they share one camera. The sections below exist in service of building this.
+      </p>
+    </div>
+
+    <div class="level-diagram">
+      <div class="level">
+        <div class="level-num">01</div>
+        <div class="level-body">
+          <h4>Universe</h4>
+          <strong>Your whole knowledge space, seen at once.</strong>
+          <p>Clusters, constellations, colored density. Too far out to read labels of individual items — just the shapes of what you&rsquo;ve been thinking about.</p>
+        </div>
+      </div>
+      <div class="level">
+        <div class="level-num">02</div>
+        <div class="level-body">
+          <h4>Cluster</h4>
+          <strong>A constellation resolves into its members.</strong>
+          <p>One cluster is now the stage. You can see the papers, ideas, people inside it. Auto-labeled by topic. Edges suggest links.</p>
+        </div>
+      </div>
+      <div class="level">
+        <div class="level-num">03</div>
+        <div class="level-body">
+          <h4>Canvas</h4>
+          <strong>An infinite whiteboard for one territory of thought.</strong>
+          <p>Cards arranged in groups, connected, annotated. Sticky notes, text blocks, inline quotes. You can rearrange and write here freely.</p>
+        </div>
+      </div>
+      <div class="level">
+        <div class="level-num">04</div>
+        <div class="level-body">
+          <h4>Detail</h4>
+          <strong>A single card opens into a full explorable page.</strong>
+          <p>Source links, full notes, embedded visualizations, reactive variables, scrollytelling within a card. The &ldquo;expanded&rdquo; view of any node.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="small muted" style="margin-top: 2rem;">
+      Jump to <a href="#build">§14 · Your Build</a> if you want the construction paths first.
+      Otherwise, read on for the ideas.
+    </p>
+  </div>
+</section>
+
+<!-- =========================================================
+     01 · EXPLORABLE EXPLANATIONS
+     ========================================================= -->
+<section id="explorables">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">01 · Explorable Explanations</span>
+      <h2>Documents that <em>react</em> to you</h2>
+      <p class="section-lede">
+        Bret Victor&rsquo;s 2011 essay named the genre: prose whose statements change as you manipulate its
+        premises. The idea branched — into playable essays (Nicky Case), interactive textbooks (Seeing Theory,
+        Immersive Linear Algebra), and long-form explainers where every number is draggable.
+      </p>
+    </div>
+
+    <p>
+      The triad from Victor&rsquo;s essay: <strong class="accent">reactive documents</strong> (statements that
+      update when a premise changes), <strong class="cyan">explorable examples</strong> (miniature sandboxes
+      embedded inline), and <strong class="magenta">contextual information</strong> (every claim tethered to
+      its source). Most modern explorables combine all three.
+    </p>
+
+    <blockquote class="pullquote">
+      I want to convince you that the current state of written media is embarrassing &mdash; not because it
+      fails to use fancy new technology, but because it fails to use the most basic technology of all:
+      reactive feedback.
+      <cite class="pullquote-cite">Bret Victor · <em>Explorable Explanations</em> · 2011</cite>
+    </blockquote>
+
+    <!-- Tangle demo -->
+    <div class="demo-box" id="tangle-demo">
+      <span class="demo-label">Live · Tangle-style demo</span>
+      <h4 style="margin-top: 0;">Drag the highlighted numbers</h4>
+      <p class="tangle-demo">
+        If
+        <span class="tangle-var" data-var="households">
+          <span data-bind="households">20%</span>
+        </span>
+        of US households cut their energy use by
+        <span class="tangle-var" data-var="reduction">
+          <span data-bind="reduction">10%</span>
+        </span>, the country saves
+        <span class="tangle-result" data-bind="savings">2.00%</span>
+        of its total energy &mdash; the equivalent of
+        <span class="tangle-result" data-bind="power-plants">14.0</span>
+        power plants shut down.
+      </p>
+      <p class="small muted">
+        This is the simplest form of an explorable. Both variables drive a shared expression. Drag left or right
+        on the highlighted numbers. The pattern is from <a href="https://worrydream.com/Tangle/">Tangle.js</a>.
+      </p>
+    </div>
+
+    <h3>The canonical works</h3>
+
+    <div class="cards">
+      <a class="card featured" href="https://worrydream.com/TenBrighterIdeas/" target="_blank" rel="noopener">
+        <div class="card-title">Ten Brighter Ideas?</div>
+        <div class="card-author">Bret Victor · 2010</div>
+        <div class="card-desc">The first published explorable. Ten energy-policy claims; every statistic is a draggable slider that cascades through the prose.</div>
+        <div class="card-tags"><span class="card-tag">seminal</span><span class="card-tag">tangle</span></div>
+      </a>
+      <a class="card featured" href="https://worrydream.com/ExplorableExplanations/" target="_blank" rel="noopener">
+        <div class="card-title">Explorable Explanations (essay)</div>
+        <div class="card-author">Bret Victor · 2011</div>
+        <div class="card-desc">The manifesto that named the genre. Defines reactive documents, explorable examples, and contextual information.</div>
+        <div class="card-tags"><span class="card-tag">manifesto</span></div>
+      </a>
+      <a class="card featured" href="https://ncase.me/polygons/" target="_blank" rel="noopener">
+        <div class="card-title">Parable of the Polygons</div>
+        <div class="card-author">Nicky Case &amp; Vi Hart · 2014</div>
+        <div class="card-desc">Playable Schelling segregation. Probably the single most influential modern explorable.</div>
+        <div class="card-tags"><span class="card-tag">sim</span><span class="card-tag">social</span></div>
+      </a>
+      <a class="card" href="https://ncase.me/trust/" target="_blank" rel="noopener">
+        <div class="card-title">The Evolution of Trust</div>
+        <div class="card-author">Nicky Case · 2017</div>
+        <div class="card-desc">Game-theoretic history of cooperation as an iterated prisoner&rsquo;s dilemma. Playable.</div>
+        <div class="card-tags"><span class="card-tag">sim</span><span class="card-tag">game-theory</span></div>
+      </a>
+      <a class="card" href="https://ncase.me/neurons/" target="_blank" rel="noopener">
+        <div class="card-title">Neurotic Neurons</div>
+        <div class="card-author">Nicky Case · 2015</div>
+        <div class="card-desc">Hebbian learning as anxiety / exposure therapy. Draw your own neurons and train them.</div>
+        <div class="card-tags"><span class="card-tag">sim</span></div>
+      </a>
+      <a class="card" href="https://ncase.me/crowds/" target="_blank" rel="noopener">
+        <div class="card-title">Wisdom and/or Madness of Crowds</div>
+        <div class="card-author">Nicky Case · 2018</div>
+        <div class="card-desc">Complex contagion vs. simple contagion, network structure made tangible.</div>
+        <div class="card-tags"><span class="card-tag">sim</span></div>
+      </a>
+      <a class="card" href="https://ciechanow.ski/" target="_blank" rel="noopener">
+        <div class="card-title">Bartosz Ciechanowski</div>
+        <div class="card-author">2017&ndash;present</div>
+        <div class="card-desc">The pinnacle of long-form mechanical explainers. Mechanical Watch, GPS, Gears, Sound, Bicycle, Internal Combustion Engine. Every diagram is manipulable.</div>
+        <div class="card-tags"><span class="card-tag hot">must-see</span></div>
+      </a>
+      <a class="card featured" href="https://www.redblobgames.com/pathfinding/a-star/introduction.html" target="_blank" rel="noopener">
+        <div class="card-title">Introduction to A* Pathfinding</div>
+        <div class="card-author">Amit Patel · Red Blob Games</div>
+        <div class="card-desc">The gold standard for CS/game-math tutorials. Also see his Hexagonal Grids &mdash; the definitive reference.</div>
+        <div class="card-tags"><span class="card-tag">cs</span></div>
+      </a>
+      <a class="card" href="https://setosa.io/ev/" target="_blank" rel="noopener">
+        <div class="card-title">Setosa · Explained Visually</div>
+        <div class="card-author">Victor Powell &amp; Lewis Lehe</div>
+        <div class="card-desc">Markov chains, eigenvectors, PCA, conditional probability &mdash; each a single, perfect interactive page.</div>
+        <div class="card-tags"><span class="card-tag">math</span></div>
+      </a>
+      <a class="card" href="https://seeing-theory.brown.edu/" target="_blank" rel="noopener">
+        <div class="card-title">Seeing Theory</div>
+        <div class="card-author">Daniel Kunin · Brown University</div>
+        <div class="card-desc">Probability and statistics reimagined as a visual textbook. Six chapters of playable theory.</div>
+        <div class="card-tags"><span class="card-tag">textbook</span></div>
+      </a>
+      <a class="card" href="http://immersivemath.com/ila/" target="_blank" rel="noopener">
+        <div class="card-title">Immersive Linear Algebra</div>
+        <div class="card-author">Ström, Åström, Akenine-Möller</div>
+        <div class="card-desc">First fully interactive linear algebra textbook. Every figure is manipulable.</div>
+        <div class="card-tags"><span class="card-tag">textbook</span></div>
+      </a>
+      <a class="card" href="http://www.r2d3.us/visual-intro-to-machine-learning-part-1/" target="_blank" rel="noopener">
+        <div class="card-title">A Visual Introduction to Machine Learning</div>
+        <div class="card-author">Stephanie Yee &amp; Tony Chu · R2D3</div>
+        <div class="card-desc">Scrolly ML primer. The picture-book aesthetic that launched a thousand imitators.</div>
+        <div class="card-tags"><span class="card-tag">ml</span><span class="card-tag">scrolly</span></div>
+      </a>
+      <a class="card" href="https://playground.tensorflow.org/" target="_blank" rel="noopener">
+        <div class="card-title">TensorFlow Playground</div>
+        <div class="card-author">Smilkov &amp; Carter · Google</div>
+        <div class="card-desc">Neural net sandbox. Shipped with TensorFlow. Still the fastest way to &ldquo;feel&rdquo; a neural net.</div>
+        <div class="card-tags"><span class="card-tag">ml</span><span class="card-tag">sandbox</span></div>
+      </a>
+      <a class="card" href="https://distill.pub/2020/communicating-with-interactive-articles/" target="_blank" rel="noopener">
+        <div class="card-title">Communicating with Interactive Articles</div>
+        <div class="card-author">Hohman, Conlen, Heer, Chau · 2020</div>
+        <div class="card-desc">The meta-paper. A catalog and taxonomy of the explorable-explanation genre.</div>
+        <div class="card-tags"><span class="card-tag">theory</span></div>
+      </a>
+      <a class="card" href="https://quantum.country/" target="_blank" rel="noopener">
+        <div class="card-title">Quantum Country</div>
+        <div class="card-author">Matuschak &amp; Nielsen</div>
+        <div class="card-desc">Textbook with embedded spaced-repetition &mdash; an explorable that remembers you.</div>
+        <div class="card-tags"><span class="card-tag">textbook</span><span class="card-tag">memory</span></div>
+      </a>
+      <a class="card" href="https://pomax.github.io/bezierinfo/" target="_blank" rel="noopener">
+        <div class="card-title">A Primer on Bézier Curves</div>
+        <div class="card-author">Pomax</div>
+        <div class="card-desc">A hundred-page interactive reference on Béziers. Drag every control point.</div>
+        <div class="card-tags"><span class="card-tag">geometry</span></div>
+      </a>
+      <a class="card" href="https://jackschaedler.github.io/circles-sines-signals/" target="_blank" rel="noopener">
+        <div class="card-title">Circles, Sines and Signals</div>
+        <div class="card-author">Jack Schaedler</div>
+        <div class="card-desc">A compact interactive DSP primer that fits on a single scrolling page.</div>
+        <div class="card-tags"><span class="card-tag">dsp</span></div>
+      </a>
+      <a class="card" href="https://www.complexity-explorables.org/" target="_blank" rel="noopener">
+        <div class="card-title">Complexity Explorables</div>
+        <div class="card-author">Dirk Brockmann · collection</div>
+        <div class="card-desc">70+ simulations of complex systems &mdash; Kuramoto, Vicsek, Schelling, percolation, reaction-diffusion.</div>
+        <div class="card-tags"><span class="card-tag">sim</span><span class="card-tag">science</span></div>
+      </a>
+    </div>
+
+    <h3>Curated hubs &amp; collections</h3>
+    <div class="cards">
+      <a class="card" href="https://explorabl.es/" target="_blank" rel="noopener">
+        <div class="card-title">explorabl.es</div>
+        <div class="card-author">Nicky Case, curator</div>
+        <div class="card-desc">The big list &mdash; categorized by topic: society, technology, math, biology, physics, more.</div>
+      </a>
+      <a class="card" href="https://github.com/blob42/awesome-explorables" target="_blank" rel="noopener">
+        <div class="card-title">awesome-explorables</div>
+        <div class="card-author">GitHub · curated</div>
+        <div class="card-desc">Deep link farm for explorables. Complements explorabl.es with more one-off gems.</div>
+      </a>
+      <a class="card" href="https://distill.pub/" target="_blank" rel="noopener">
+        <div class="card-title">Distill.pub</div>
+        <div class="card-author">2016&ndash;2021 · paused</div>
+        <div class="card-desc">Peer-reviewed interactive ML articles. On hiatus, but the archive is a masterclass.</div>
+      </a>
+      <a class="card" href="https://ncase.me/projects/" target="_blank" rel="noopener">
+        <div class="card-title">Nicky Case · projects</div>
+        <div class="card-author">Index of his work</div>
+        <div class="card-desc">Every explorable Nicky has made. Also follow his blog for how-to posts on craft.</div>
+      </a>
+    </div>
+
+    <h3>Techniques used</h3>
+    <ul class="concept-list">
+      <li><strong>Reactive variables</strong><span>Tangle-style inline numbers that cascade through the whole document.</span></li>
+      <li><strong>Inline widgets</strong><span>Miniature playable sims interleaved with text (ncase, Setosa).</span></li>
+      <li><strong>Click-to-advance</strong><span>Reader paces through frames of an animation (Polygons, R2D3).</span></li>
+      <li><strong>Parameter sliders</strong><span>Knobs you can turn on an embedded system (TF Playground, GAN Lab).</span></li>
+      <li><strong>Agent-based models</strong><span>Cells or creatures following rules you edit live.</span></li>
+      <li><strong>Before/after sliders</strong><span>Juxtaposition comparators.</span></li>
+      <li><strong>Direct-manipulation geometry</strong><span>Drag control points to reshape a curve or diagram.</span></li>
+      <li><strong>Embedded spaced repetition</strong><span>Flashcards inline in prose (Quantum Country, Orbit).</span></li>
+      <li><strong>Linked primary sources</strong><span>Every number is a live citation that opens on hover.</span></li>
+      <li><strong>Playable essays</strong><span>A whole argument delivered as a short game.</span></li>
+    </ul>
+
+    <h3>Tools for building explorables</h3>
+    <div class="lib-list">
+      <div class="lib"><span class="lib-name"><a href="https://worrydream.com/Tangle/">Tangle.js</a></span><span class="lib-desc">The original reactive-document library. HTML-attribute driven; unmaintained but conceptually foundational.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://idyll-lang.org/">Idyll</a></span><span class="lib-desc">Matthew Conlen&rsquo;s markup language for interactive articles. Markdown-like, compiles to React.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://observablehq.com/">Observable</a></span><span class="lib-desc">Mike Bostock&rsquo;s reactive notebook platform. Cells recompute when inputs change.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://svelte.dev/">Svelte</a></span><span class="lib-desc">Compiled reactivity. Tiny bundles, first-class reactive variables &mdash; ideal for modern explorables.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://mdxjs.com/">MDX</a></span><span class="lib-desc">Markdown + React components. The standard way to put interactive widgets in prose today.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://curvenote.com/">Curvenote</a></span><span class="lib-desc">MyST Markdown + executable cells. Scientific-paper oriented.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://mystmd.org/">MyST Markdown</a></span><span class="lib-desc">Markdown superset with cross-references, citations, interactive cells.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://quarto.org/">Quarto</a></span><span class="lib-desc">Publishing system with Observable JS and Python support. Great for academic explorables.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://marimo.io/">marimo</a></span><span class="lib-desc">Reactive Python notebooks &mdash; like Observable but for the PyData stack.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://ncase.me/nutshell/">Nutshell</a></span><span class="lib-desc">Nicky&rsquo;s tool for expandable-inline explanations &mdash; click a word, see a widget.</span></div>
+    </div>
+
+    <details>
+      <summary>More explorables worth your time (expand)</summary>
+      <div class="cards">
+        <a class="card" href="https://ncase.me/attractors/" target="_blank" rel="noopener"><div class="card-title">Attractor Landscapes</div><div class="card-author">Nicky Case</div><div class="card-desc">Dynamical systems and basins of attraction.</div></a>
+        <a class="card" href="https://ncase.me/fireflies/" target="_blank" rel="noopener"><div class="card-title">Fireflies</div><div class="card-author">Nicky Case</div><div class="card-desc">Kuramoto synchronization. Watch fireflies fall into phase.</div></a>
+        <a class="card" href="https://ncase.me/loopy/" target="_blank" rel="noopener"><div class="card-title">Loopy</div><div class="card-author">Nicky Case</div><div class="card-desc">Build your own causal-loop diagram with live simulation.</div></a>
+        <a class="card" href="https://ncase.me/anxiety/" target="_blank" rel="noopener"><div class="card-title">Adventures with Anxiety</div><div class="card-author">Nicky Case</div><div class="card-desc">Interactive mental-health narrative.</div></a>
+        <a class="card" href="https://ncase.me/ballot/" target="_blank" rel="noopener"><div class="card-title">To Build a Better Ballot</div><div class="card-author">Nicky Case</div><div class="card-desc">Voting systems &mdash; IRV, approval, plurality &mdash; made legible.</div></a>
+        <a class="card" href="https://aisafety.dance/" target="_blank" rel="noopener"><div class="card-title">AI Safety for Fleshy Humans</div><div class="card-author">Nicky Case · 2024</div><div class="card-desc">Recent long-form primer on AI risk. Playable sections.</div></a>
+        <a class="card" href="https://ncase.itch.io/wbwwb" target="_blank" rel="noopener"><div class="card-title">We Become What We Behold</div><div class="card-author">Nicky Case · 2016</div><div class="card-desc">A tiny game about the news-cycle attention loop.</div></a>
+        <a class="card" href="https://worrydream.com/LadderOfAbstraction/" target="_blank" rel="noopener"><div class="card-title">Up and Down the Ladder of Abstraction</div><div class="card-author">Bret Victor</div><div class="card-desc">Interactive essay on moving between concrete instance and abstract pattern.</div></a>
+        <a class="card" href="https://dood.al/pinktrombone/" target="_blank" rel="noopener"><div class="card-title">Pink Trombone</div><div class="card-author">Neil Thapen</div><div class="card-desc">Drag the tongue to speak. A live vocal-tract simulator.</div></a>
+        <a class="card" href="https://poloclub.github.io/ganlab/" target="_blank" rel="noopener"><div class="card-title">GAN Lab</div><div class="card-author">Kahng, Thorat, Chau, Viégas, Wattenberg</div><div class="card-desc">Watch a GAN train in your browser.</div></a>
+        <a class="card" href="https://www.redblobgames.com/grids/hexagons/" target="_blank" rel="noopener"><div class="card-title">Hexagonal Grids</div><div class="card-author">Red Blob Games</div><div class="card-desc">The definitive interactive reference on hex grids.</div></a>
+        <a class="card" href="https://bost.ocks.org/mike/algorithms/" target="_blank" rel="noopener"><div class="card-title">Visualizing Algorithms</div><div class="card-author">Mike Bostock</div><div class="card-desc">Sort, shuffle, pack &mdash; rendered as art. The D3 canon.</div></a>
+      </div>
+    </details>
+
+    <div class="callout cyan">
+      <div class="callout-title">A warning worth remembering</div>
+      <p>
+        Explorables are expensive to make &mdash; Bartosz Ciechanowski&rsquo;s articles take months each. Distill
+        paused in 2021 citing author burnout. Evan Miller&rsquo;s <a href="https://www.evanmiller.org/dont-kill-math.html">Don&rsquo;t Kill Math</a>
+        pushed back on Victor&rsquo;s <em>Kill Math</em> project, arguing symbolic notation has irreplaceable
+        power. Interactive doesn&rsquo;t automatically mean better.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     02 · NARRATIVE VISUALIZATION & SCROLLYTELLING
+     ========================================================= -->
+<section id="narrative">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">02 · Narrative &amp; Scrollytelling</span>
+      <h2>Stories that <em>unfold</em> as you scroll</h2>
+      <p class="section-lede">
+        The visual essay is its own medium now. Since the NYT&rsquo;s <em>Snow Fall</em> in 2012, newsrooms and
+        studios have built a shared vocabulary: sticky graphics, stepped captions, scroll-driven animation,
+        parallax, chapter transitions. The Pudding has turned it into a full editorial identity.
+      </p>
+    </div>
+
+    <blockquote class="pullquote">
+      Show <em>and</em> tell. The best graphics pair visualization with annotation.
+      <cite class="pullquote-cite">Alberto Cairo</cite>
+    </blockquote>
+
+    <h3>Canonical pieces</h3>
+    <div class="cards">
+      <a class="card featured" href="https://www.nytimes.com/projects/2012/snow-fall/" target="_blank" rel="noopener">
+        <div class="card-title">Snow Fall: The Avalanche at Tunnel Creek</div>
+        <div class="card-author">John Branch · NYT · 2012</div>
+        <div class="card-desc">Won a Pulitzer. Spawned &ldquo;to snowfall&rdquo; as a verb. The piece that made multimedia longform a real form.</div>
+        <div class="card-tags"><span class="card-tag">seminal</span></div>
+      </a>
+      <a class="card featured" href="https://www.nytimes.com/interactive/2020/03/22/world/coronavirus-spread.html" target="_blank" rel="noopener">
+        <div class="card-title">How the Virus Got Out</div>
+        <div class="card-author">NYT · March 2020</div>
+        <div class="card-desc">COVID spread from Wuhan traced by mobile-phone movement. One of the most-shared viz pieces of the pandemic.</div>
+      </a>
+      <a class="card featured" href="https://www.washingtonpost.com/graphics/2020/world/corona-simulator/" target="_blank" rel="noopener">
+        <div class="card-title">Why outbreaks like coronavirus spread exponentially</div>
+        <div class="card-author">Harry Stevens · WaPo · March 14, 2020</div>
+        <div class="card-desc">&ldquo;Simulitis.&rdquo; Four-scenario simulation. Tweeted by Obama. The decade&rsquo;s most important data viz.</div>
+        <div class="card-tags"><span class="card-tag hot">must-see</span></div>
+      </a>
+      <a class="card featured" href="https://pudding.cool/2017/03/hamilton/" target="_blank" rel="noopener">
+        <div class="card-title">An Interactive Visualization of Every Line in Hamilton</div>
+        <div class="card-author">Shirley Wu · The Pudding · 2017</div>
+        <div class="card-desc">Character dialogue, themes, and music rendered as a scrolling bouquet.</div>
+      </a>
+      <a class="card" href="https://pudding.cool/2018/08/pockets/" target="_blank" rel="noopener">
+        <div class="card-title">Women&rsquo;s Pockets Are Inferior</div>
+        <div class="card-author">Diehm &amp; Thomas · The Pudding</div>
+        <div class="card-desc">Measured every pocket in 80 pairs of jeans. The Pudding&rsquo;s most-shared piece.</div>
+      </a>
+      <a class="card" href="https://pudding.cool/2019/04/vogue/" target="_blank" rel="noopener">
+        <div class="card-title">Colorism in High Fashion</div>
+        <div class="card-author">The Pudding · 2019</div>
+        <div class="card-desc">Nineteen years of Vogue covers classified by model skin tone.</div>
+      </a>
+      <a class="card" href="https://ig.ft.com/uber-game/" target="_blank" rel="noopener">
+        <div class="card-title">The Uber Game</div>
+        <div class="card-author">Robin Kwong · FT · 2017</div>
+        <div class="card-desc">Choose-your-own-adventure news game. Earn $1,000 in a week as a driver. Built with Ink.</div>
+        <div class="card-tags"><span class="card-tag">game</span></div>
+      </a>
+      <a class="card" href="https://graphics.reuters.com/HONGKONG-PROTESTS/010092PC2AF/index.html" target="_blank" rel="noopener">
+        <div class="card-title">Visualising the Hong Kong Protests</div>
+        <div class="card-author">Reuters Graphics</div>
+        <div class="card-desc">Crowd-size estimation with scientists; hand-signal diagrams. Beautiful, grim.</div>
+      </a>
+      <a class="card" href="https://www.nytimes.com/interactive/2019/world/europe/notre-dame.html" target="_blank" rel="noopener">
+        <div class="card-title">Notre-Dame Fire</div>
+        <div class="card-author">NYT Graphics</div>
+        <div class="card-desc">Architectural explainer with 3D model and scroll-driven camera moves through the cathedral.</div>
+      </a>
+      <a class="card" href="https://pudding.cool/2017/05/song-repetition/" target="_blank" rel="noopener">
+        <div class="card-title">Are Pop Lyrics Getting More Repetitive?</div>
+        <div class="card-author">Colin Morris · The Pudding</div>
+        <div class="card-desc">Lempel-Ziv compression applied to every No. 1 hit since 1958.</div>
+      </a>
+      <a class="card" href="https://pudding.cool/projects/vocabulary/index.html" target="_blank" rel="noopener">
+        <div class="card-title">The Largest Vocabulary in Hip Hop</div>
+        <div class="card-author">Matt Daniels · The Pudding</div>
+        <div class="card-desc">35,000 lyrics per rapper, ranked. The piece that launched The Pudding.</div>
+      </a>
+      <a class="card" href="https://pudding.cool/2022/04/rickroll/" target="_blank" rel="noopener">
+        <div class="card-title">A Visual History of Rickrolling</div>
+        <div class="card-author">The Pudding · 2022</div>
+        <div class="card-desc">A rickroll history told as a rickroll.</div>
+      </a>
+      <a class="card" href="https://pudding.cool/2018/04/birthday-paradox/" target="_blank" rel="noopener">
+        <div class="card-title">The Birthday Paradox Experiment</div>
+        <div class="card-author">Russell Goldenberg · The Pudding</div>
+        <div class="card-desc">You become part of the data. A live exhibit of the paradox.</div>
+      </a>
+      <a class="card" href="https://www.bloomberg.com/graphics/2025-in-graphics/" target="_blank" rel="noopener">
+        <div class="card-title">Bloomberg · 2025 in Graphics</div>
+        <div class="card-author">Bloomberg Graphics</div>
+        <div class="card-desc">Annual best-of from one of the strongest newsroom viz desks.</div>
+      </a>
+      <a class="card" href="https://www.nytimes.com/interactive/2014/09/25/sports/baseball/jeter-swings.html" target="_blank" rel="noopener">
+        <div class="card-title">342,000 Swings Later</div>
+        <div class="card-author">NYT · 2014</div>
+        <div class="card-desc">Derek Jeter&rsquo;s career in scrolly form. Frequently cited as a perfect example.</div>
+      </a>
+      <a class="card" href="https://www.scmp.com/infographics" target="_blank" rel="noopener">
+        <div class="card-title">SCMP Infographics</div>
+        <div class="card-author">South China Morning Post</div>
+        <div class="card-desc">Print-quality illustrated long-form. Simon Scarr, Marco Hernandez, Adolfo Arranz.</div>
+      </a>
+    </div>
+
+    <h3>Segel &amp; Heer&rsquo;s three structures (2010)</h3>
+    <p>
+      The canonical taxonomy from Stanford. Every narrative visualization falls somewhere on this spectrum.
+    </p>
+    <table>
+      <thead>
+        <tr><th>Structure</th><th>How it feels</th><th>Example</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Martini Glass</strong></td>
+          <td>Fixed narrative stem, then opens into exploration</td>
+          <td>Most news graphics. Story first, data playground after.</td>
+        </tr>
+        <tr>
+          <td><strong>Interactive Slideshow</strong></td>
+          <td>Frame-by-frame author guidance with interaction inside each frame</td>
+          <td>NYT Upshot step-throughs, scrollytelling pieces</td>
+        </tr>
+        <tr>
+          <td><strong>Drill-Down Story</strong></td>
+          <td>Reader-led: overview theme, cases you pick into</td>
+          <td>Open Knowledge Maps, dashboards, Connected Papers</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="small">
+      <a href="http://vis.stanford.edu/files/2010-Narrative-InfoVis.pdf">Segel &amp; Heer · Narrative Visualization: Telling Stories with Data · 2010</a>
+    </p>
+
+    <h3>Techniques</h3>
+    <ul class="concept-list">
+      <li><strong>Sticky graphic + stepped text</strong><span>Graphic pins, text-steps swap state. The dominant pattern.</span></li>
+      <li><strong>Parallax scrolling</strong><span>Layers move at different speeds for depth.</span></li>
+      <li><strong>Scroll-driven animation</strong><span>Scroll position fires discrete animation frames.</span></li>
+      <li><strong>Map-based scrolly</strong><span>Scroll drives a zooming, panning map.</span></li>
+      <li><strong>Video-scrubbing scrolly</strong><span>Scroll scrubs <code>currentTime</code> on an HTML5 video.</span></li>
+      <li><strong>Chapter transitions</strong><span>Full-bleed slides swap at scroll thresholds.</span></li>
+      <li><strong>Horizontal scrolly</strong><span>Vertical scroll translated to horizontal movement.</span></li>
+      <li><strong>3D scrollytelling</strong><span>Three.js camera moves with scroll (Notre-Dame, Pudding globes).</span></li>
+      <li><strong>Branching / game scrolly</strong><span>Scroll + choice hybrids (Uber Game).</span></li>
+      <li><strong>Dataset-as-protagonist</strong><span>A single dataset revealed progressively, overview to detail.</span></li>
+    </ul>
+
+    <h3>Libraries for scrolly</h3>
+    <div class="lib-list">
+      <div class="lib"><span class="lib-name"><a href="https://github.com/russellgoldenberg/scrollama">Scrollama</a></span><span class="lib-desc">Russell Goldenberg (The Pudding). IntersectionObserver-based, lightweight, accessible. De facto standard.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://gsap.com/docs/v3/Plugins/ScrollTrigger/">GSAP ScrollTrigger</a></span><span class="lib-desc">Complex timeline-driven scroll animation. Now free after the Webflow acquisition.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://github.com/darkroomengineering/lenis">Lenis</a></span><span class="lib-desc">Buttery smooth-scroll on top of native scrolling (not hijacking). Pairs with ScrollTrigger.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://motion.dev/">Motion (Framer Motion)</a></span><span class="lib-desc">Declarative React scroll-linked animations via <code>useScroll</code>, <code>useTransform</code>.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://github.com/locomotivemtl/locomotive-scroll">Locomotive Scroll</a></span><span class="lib-desc">Awwwards-site smooth-scroll. v5 is built on Lenis.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://shorthand.com/features/scrollytelling/">Shorthand</a></span><span class="lib-desc">No-code drag-and-drop scrolly for newsrooms and brands.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://github.com/mapbox/storytelling">Mapbox Storytelling</a></span><span class="lib-desc">Drop-in map-scrolly framework. Chapter config + Mapbox GL.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://github.com/the-pudding/svelte-starter">Pudding Svelte Starter</a></span><span class="lib-desc">The Pudding&rsquo;s public template. SvelteKit + D3 + data pipeline.</span></div>
+    </div>
+
+    <h3>Studios worth knowing</h3>
+    <div class="cards">
+      <a class="card" href="https://pudding.cool/" target="_blank" rel="noopener"><div class="card-title">The Pudding</div><div class="card-author">Brooklyn · editorial</div><div class="card-desc">Visual essays on culture and data. Matt Daniels founded; Russell Goldenberg edits.</div></a>
+      <a class="card" href="https://polygraph.cool/" target="_blank" rel="noopener"><div class="card-title">Polygraph</div><div class="card-author">The Pudding&rsquo;s parent studio</div><div class="card-desc">Client work (Google, YouTube, Netflix) that funds The Pudding&rsquo;s editorial autonomy.</div></a>
+      <a class="card" href="https://pitchinteractive.com/" target="_blank" rel="noopener"><div class="card-title">Pitch Interactive</div><div class="card-author">Wesley Grubbs</div><div class="card-desc">Out of Sight, Out of Mind; SPLC Hate Map. Award-winning studio.</div></a>
+      <a class="card" href="https://truth-and-beauty.net/" target="_blank" rel="noopener"><div class="card-title">Truth &amp; Beauty</div><div class="card-author">Moritz Stefaner</div><div class="card-desc">Peak Spotting, Project Ukko, EPFL Data Monolith. Exhibited at Venice Biennale.</div></a>
+      <a class="card" href="https://www.pentagram.com/about/giorgia-lupi" target="_blank" rel="noopener"><div class="card-title">Giorgia Lupi · Pentagram</div><div class="card-author">Data Humanism</div><div class="card-desc">The manifesto for qualitative, hand-drawn, people-centered data.</div></a>
+      <a class="card" href="https://www.visualcinnamon.com/" target="_blank" rel="noopener"><div class="card-title">Nadieh Bremer · Visual Cinnamon</div><div class="card-author">Award-winning solo studio</div><div class="card-desc">Data Sketches (with Shirley Wu) is required reading.</div></a>
+      <a class="card" href="https://shirleywu.studio/" target="_blank" rel="noopener"><div class="card-title">Shirley Wu</div><div class="card-author">Interactive data storytelling</div><div class="card-desc">Hamilton, Culture of Music, Legends.</div></a>
+      <a class="card" href="https://kontinentalist.com/" target="_blank" rel="noopener"><div class="card-title">Kontinentalist</div><div class="card-author">Singapore · Asia-focused</div><div class="card-desc">Data stories from Asia. Often bilingual, always beautiful.</div></a>
+    </div>
+
+    <details>
+      <summary>More resources and aggregators</summary>
+      <div class="lib-list" style="margin-top: 1rem;">
+        <div class="lib"><span class="lib-name"><a href="https://github.com/wbkd/awesome-interactive-journalism">awesome-interactive-journalism</a></span><span class="lib-desc">The big curated list.</span></div>
+        <div class="lib"><span class="lib-name"><a href="https://shorthand.com/the-craft/scrollytelling-examples/">Shorthand · Scrolly Examples</a></span><span class="lib-desc">Dozens of scrollies with what works/doesn&rsquo;t.</span></div>
+        <div class="lib"><span class="lib-name"><a href="https://vallandingham.me/scroll_talk/examples/">Vallandingham · Scroll Talk</a></span><span class="lib-desc">Jim Vallandingham&rsquo;s conference talk examples.</span></div>
+        <div class="lib"><span class="lib-name"><a href="https://www.informationisbeautifulawards.com/">Information is Beautiful Awards</a></span><span class="lib-desc">Annual awards. Good browsing.</span></div>
+        <div class="lib"><span class="lib-name"><a href="https://pudding.cool/process/introducing-scrollama/">Pudding · Introducing Scrollama</a></span><span class="lib-desc">The library&rsquo;s own explainer.</span></div>
+        <div class="lib"><span class="lib-name"><a href="https://pudding.cool/process/how-to-implement-scrollytelling/">Pudding · Six Scrolly Libraries</a></span><span class="lib-desc">Side-by-side comparison.</span></div>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- =========================================================
+     03 · REACTIVE DOCUMENTS
+     ========================================================= -->
+<section id="reactive">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">03 · Reactive Documents</span>
+      <h2>Prose where every <em>value</em> is live</h2>
+      <p class="section-lede">
+        A reactive document is one where inputs change outputs automatically &mdash; the whole page is a
+        spreadsheet in disguise. Tangle in 2011 invented the idiom; Observable generalized it into a
+        full notebook; modern frameworks (Svelte, MDX, Solid) make it a language feature.
+      </p>
+    </div>
+
+    <h3>Foundational tools</h3>
+    <div class="cards">
+      <a class="card featured" href="https://worrydream.com/Tangle/" target="_blank" rel="noopener">
+        <div class="card-title">Tangle.js</div>
+        <div class="card-author">Bret Victor · 2011</div>
+        <div class="card-desc">The original. HTML-attribute-driven inline reactive numbers. Unmaintained since 2013 but still cloned and ported constantly.</div>
+        <div class="card-tags"><span class="card-tag">seminal</span></div>
+      </a>
+      <a class="card featured" href="https://observablehq.com/" target="_blank" rel="noopener">
+        <div class="card-title">Observable</div>
+        <div class="card-author">Mike Bostock · 2018&ndash;present</div>
+        <div class="card-desc">Reactive notebooks on the web. Cells auto-recompute when upstream inputs change. Framework (for static sites) launched 2024.</div>
+        <div class="card-tags"><span class="card-tag">notebook</span><span class="card-tag">d3</span></div>
+      </a>
+      <a class="card featured" href="https://observablehq.com/framework/" target="_blank" rel="noopener">
+        <div class="card-title">Observable Framework</div>
+        <div class="card-author">Observable · 2024</div>
+        <div class="card-desc">Static-site generator for data-driven pages. Markdown + reactive cells + dataloaders (Python, R, SQL). What you&rsquo;d use today for most explorables.</div>
+        <div class="card-tags"><span class="card-tag hot">current</span></div>
+      </a>
+      <a class="card" href="https://idyll-lang.org/" target="_blank" rel="noopener">
+        <div class="card-title">Idyll</div>
+        <div class="card-author">Matthew Conlen · 2018</div>
+        <div class="card-desc">Markup language for interactive articles. Markdown-like syntax compiles to React. Less active now but conceptually important.</div>
+      </a>
+      <a class="card" href="https://mdxjs.com/" target="_blank" rel="noopener">
+        <div class="card-title">MDX</div>
+        <div class="card-author">The MDX team</div>
+        <div class="card-desc">Markdown + JSX. The dominant way to embed React widgets in prose today. Used by Next.js, Astro, Docusaurus.</div>
+      </a>
+      <a class="card" href="https://svelte.dev/" target="_blank" rel="noopener">
+        <div class="card-title">Svelte</div>
+        <div class="card-author">Rich Harris</div>
+        <div class="card-desc">Compiled reactivity &mdash; variables are reactive as a language feature. Minimal runtime. The Pudding&rsquo;s house stack.</div>
+      </a>
+      <a class="card" href="https://curvenote.com/" target="_blank" rel="noopener">
+        <div class="card-title">Curvenote</div>
+        <div class="card-author">Curvenote Inc.</div>
+        <div class="card-desc">Scientific-publishing-focused reactive documents. Built on MyST. Jupyter cells + markdown + citations.</div>
+      </a>
+      <a class="card" href="https://mystmd.org/" target="_blank" rel="noopener">
+        <div class="card-title">MyST Markdown</div>
+        <div class="card-author">Executable Books</div>
+        <div class="card-desc">Markdown superset aimed at technical writing. Cross-refs, citations, reactive cells, LaTeX fidelity.</div>
+      </a>
+      <a class="card" href="https://quarto.org/" target="_blank" rel="noopener">
+        <div class="card-title">Quarto</div>
+        <div class="card-author">Posit (RStudio)</div>
+        <div class="card-desc">Publishing system. Markdown + Observable JS + Python + R. Batteries-included for academic explorables.</div>
+      </a>
+      <a class="card" href="https://marimo.io/" target="_blank" rel="noopener">
+        <div class="card-title">marimo</div>
+        <div class="card-author">marimo team</div>
+        <div class="card-desc">Reactive Python notebooks. Stored as .py files, dependency-tracked, deployable as apps. Observable&rsquo;s spirit, ported to Python.</div>
+      </a>
+      <a class="card" href="https://solidjs.com/" target="_blank" rel="noopener">
+        <div class="card-title">Solid.js</div>
+        <div class="card-author">Ryan Carniato</div>
+        <div class="card-desc">Fine-grained reactive primitives as a JavaScript library. Signals that spread through UI and computation.</div>
+      </a>
+      <a class="card" href="https://reactive.how/" target="_blank" rel="noopener">
+        <div class="card-title">Reactive.how</div>
+        <div class="card-author">Andrei Marinescu</div>
+        <div class="card-desc">An explorable <em>about</em> reactive programming. Animated, scroll-paced, inline playable marble diagrams.</div>
+      </a>
+    </div>
+
+    <h3>The core pattern</h3>
+    <div class="callout magenta">
+      <div class="callout-title">Why reactivity is the right default for research writing</div>
+      <p>
+        When a number appears in your notes, it almost always depends on other numbers or assumptions. If you
+        can make the <em>derivation</em> first-class &mdash; so the reader sees not just the figure but the
+        formula it came from, and can poke the inputs &mdash; the document stops lying about false
+        precision. This is Victor&rsquo;s deep claim: reactive documents don&rsquo;t just look cooler; they
+        are <em>more honest</em>.
+      </p>
+    </div>
+
+    <h3>Reactive variables vs. reactive cells</h3>
+    <ul class="concept-list">
+      <li><strong>Inline reactive values</strong><span>Tangle, Nutshell &mdash; a number embedded in prose drags to change and cascades.</span></li>
+      <li><strong>Reactive cells</strong><span>Observable, marimo &mdash; whole chunks of code re-run in a dependency graph.</span></li>
+      <li><strong>Reactive components</strong><span>Svelte, Solid, React signals &mdash; UI primitives that subscribe to data.</span></li>
+      <li><strong>Reactive paragraphs</strong><span>Experimental &mdash; whole text blocks rewritten by a language model when inputs change.</span></li>
+    </ul>
+
+    <p class="small muted" style="margin-top: 2rem;">
+      If your personal site will hold explorables at all, pick one reactive substrate and commit. The library
+      war here matters less than the consistency. Observable Framework is the least painful default for 2026.
+    </p>
+  </div>
+</section>
+
+<!-- =========================================================
+     04 · KNOWLEDGE GRAPHS
+     ========================================================= -->
+<section id="graphs">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">04 · Knowledge Graphs</span>
+      <h2>Ideas as <em>nodes and edges</em></h2>
+      <p class="section-lede">
+        The force-directed graph is the default visual grammar for &ldquo;related things.&rdquo; It&rsquo;s
+        also the one that breaks first &mdash; beyond a few hundred nodes, a hairball. This section is about
+        the <em>good</em> versions: tools that cluster, fade, expand-on-demand, and route edges.
+      </p>
+    </div>
+
+    <!-- Force-directed demo -->
+    <div class="demo-box">
+      <span class="demo-label">Live · Force-directed demo</span>
+      <h4 style="margin-top: 0;">Drag the nodes around</h4>
+      <canvas id="graph-demo" style="display: block; width: 100%; height: 360px; border-radius: 8px; background: rgba(0,0,0,0.25);"></canvas>
+      <p class="small muted" style="margin-top: 0.75rem;">
+        A tiny handmade force-directed graph: &ldquo;you&rdquo; at the center, papers / ideas / people / talks
+        orbiting. Drag any node. Same physics that underlies Connected Papers, Obsidian&rsquo;s graph view, and
+        most web knowledge maps. (Rendered on &lt;canvas&gt; for speed.)
+      </p>
+    </div>
+
+    <h3>Tools you can use today</h3>
+    <div class="cards">
+      <a class="card featured" href="https://www.connectedpapers.com/" target="_blank" rel="noopener">
+        <div class="card-title">Connected Papers</div>
+        <div class="card-author">Alex Tarnavsky et al. · 2020</div>
+        <div class="card-desc">Enter one paper, get a visual map of its neighborhood. Uses co-citation similarity, not citations directly. The gold standard for &ldquo;where am I in the literature.&rdquo;</div>
+        <div class="card-tags"><span class="card-tag hot">must-see</span></div>
+      </a>
+      <a class="card featured" href="https://www.litmaps.com/" target="_blank" rel="noopener">
+        <div class="card-title">Litmaps</div>
+        <div class="card-author">Litmaps · New Zealand</div>
+        <div class="card-desc">Seed papers → recommended neighbors. Timeline + network views. Emails you when a seed gets cited. Subscription.</div>
+      </a>
+      <a class="card featured" href="https://openknowledgemaps.org/" target="_blank" rel="noopener">
+        <div class="card-title">Open Knowledge Maps</div>
+        <div class="card-author">OKMaps · Vienna · open-source</div>
+        <div class="card-desc">Type a query, get a cluster-bubble map with topic labels. Papers nested under expandable bubbles. This is the cluster-first aesthetic you liked.</div>
+        <div class="card-tags"><span class="card-tag">open-source</span></div>
+      </a>
+      <a class="card featured" href="https://obsidian.md/" target="_blank" rel="noopener">
+        <div class="card-title">Obsidian</div>
+        <div class="card-author">Dynalist Inc.</div>
+        <div class="card-desc">Markdown notes in folders + bidirectional <code>[[wikilinks]]</code> + a live graph view. Self-hosted, plugin-rich, the researcher&rsquo;s default.</div>
+      </a>
+      <a class="card" href="https://www.thebrain.com/" target="_blank" rel="noopener">
+        <div class="card-title">TheBrain</div>
+        <div class="card-author">TheBrain Technologies · 1998&ndash;</div>
+        <div class="card-desc">The OG visual mind-mapping tool. Animated re-centering on whichever thought you click. Decades of iteration.</div>
+      </a>
+      <a class="card" href="https://www.researchrabbit.ai/" target="_blank" rel="noopener">
+        <div class="card-title">Research Rabbit</div>
+        <div class="card-author">Research Rabbit · free</div>
+        <div class="card-desc">Collection-driven paper discovery. Graph of similar/earlier/later work. Integrates with Zotero.</div>
+      </a>
+      <a class="card" href="https://inciteful.xyz/" target="_blank" rel="noopener">
+        <div class="card-title">Inciteful</div>
+        <div class="card-author">Michael Weishuhn · free</div>
+        <div class="card-desc">Paper Discovery and Literature Connector. Fast, no login, strong graph layouts.</div>
+      </a>
+      <a class="card" href="https://infranodus.com/" target="_blank" rel="noopener">
+        <div class="card-title">InfraNodus</div>
+        <div class="card-author">Dmitry Paranyushkin</div>
+        <div class="card-desc">Text-to-graph tool. Feeds prose through NLP to extract a concept network, find gaps, suggest unseen connections.</div>
+      </a>
+      <a class="card" href="https://kumu.io/" target="_blank" rel="noopener">
+        <div class="card-title">Kumu</div>
+        <div class="card-author">Kumu · systems mapping</div>
+        <div class="card-desc">Stakeholder maps, influence networks, SNA. Decorations, filters, story-mode walkthroughs.</div>
+      </a>
+      <a class="card" href="https://anvaka.github.io/map-of-github/" target="_blank" rel="noopener">
+        <div class="card-title">Anvaka · Map of GitHub</div>
+        <div class="card-author">Andrei Kashcha</div>
+        <div class="card-desc">Millions of GitHub repos laid out as a continent-like map. The canonical &ldquo;galaxy of everything&rdquo; demo.</div>
+        <div class="card-tags"><span class="card-tag">inspiration</span></div>
+      </a>
+      <a class="card" href="https://anvaka.github.io/sayit/" target="_blank" rel="noopener">
+        <div class="card-title">Anvaka · Sayit / ngraph</div>
+        <div class="card-author">Andrei Kashcha</div>
+        <div class="card-desc">Experimental graph renderers at scale &mdash; WebGL layouts, fast force sim, huge node counts.</div>
+      </a>
+      <a class="card" href="https://www.kepler.gl/" target="_blank" rel="noopener">
+        <div class="card-title">kepler.gl</div>
+        <div class="card-author">Uber Visualization</div>
+        <div class="card-desc">Not a graph tool per se, but shows what&rsquo;s possible with deck.gl + WebGL for huge datasets.</div>
+      </a>
+    </div>
+
+    <h3>Rendering libraries</h3>
+    <div class="lib-list">
+      <div class="lib"><span class="lib-name"><a href="https://d3js.org/">D3.js</a></span><span class="lib-desc"><code>d3-force</code> &mdash; the foundational force simulation. SVG or canvas. Great up to a few thousand nodes.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://www.sigmajs.org/">Sigma.js</a></span><span class="lib-desc">WebGL-backed graph rendering. Pairs with Graphology for the data layer. Handles tens of thousands of nodes.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://graphology.github.io/">Graphology</a></span><span class="lib-desc">A graph data-structure library. Louvain, Leiden, ForceAtlas2, PageRank, betweenness &mdash; all here.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://cosmograph.app/">Cosmograph</a></span><span class="lib-desc">GPU force-sim. Millions of nodes in the browser. Free React component + paid app. The current state of the art.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://reagraph.dev/">Reagraph</a></span><span class="lib-desc">React + WebGL graph component. Good defaults, clean API, accessible.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://github.com/vasturiano/3d-force-graph">3d-force-graph</a></span><span class="lib-desc">Three.js force-directed graph. 3D or VR. Vasco Asturiano&rsquo;s project; rich variants.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://js.cytoscape.org/">Cytoscape.js</a></span><span class="lib-desc">Biology-rooted graph library. Many built-in layouts, styling similar to CSS. Publication-quality.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://visjs.org/">vis.js</a></span><span class="lib-desc">The classic. Network view used by a zillion dashboards.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://reactflow.dev/">React Flow (xyflow)</a></span><span class="lib-desc">Node-based editor. Best when you want interactive node editing (think n8n, Comfy).</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://g6.antv.antgroup.com/en">G6 (AntV)</a></span><span class="lib-desc">Graph library from Alibaba. Deeply featured, good for enterprise dashboards.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://neo4j.com/">Neo4j</a></span><span class="lib-desc">The database side &mdash; native graph DB, Cypher query language. Bloom is its own viz client.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://kuzudb.com/">Kùzu</a></span><span class="lib-desc">Newer embedded graph DB (think SQLite for graphs). Fast, analytical, open.</span></div>
+    </div>
+
+    <h3>Clustering algorithms that matter</h3>
+    <ul class="concept-list">
+      <li><strong>Leiden</strong><span>Community detection. The modern successor to Louvain &mdash; produces better-connected communities. Use this.</span></li>
+      <li><strong>Louvain</strong><span>Classic modularity-based clustering. Still everywhere; Leiden usually beats it.</span></li>
+      <li><strong>HDBSCAN</strong><span>Density-based clustering. Produces hierarchical trees, handles noise, doesn&rsquo;t force you to pick <em>k</em>.</span></li>
+      <li><strong>k-means</strong><span>Fast, classic, requires <em>k</em>. Good for regular-sized clusters, bad for irregular ones.</span></li>
+      <li><strong>ForceAtlas2</strong><span>A layout algorithm, not a clustering one, but it reveals cluster structure spatially. Gephi&rsquo;s default.</span></li>
+    </ul>
+
+    <p class="small muted">
+      Practical recipe: embed your items → reduce to 10D with UMAP → HDBSCAN on that 10D → UMAP again to 2D
+      for display. The two-stage UMAP separates &ldquo;what clusters with what&rdquo; from &ldquo;where do I put
+      the dot&rdquo; and produces visibly cleaner maps.
+    </p>
+  </div>
+</section>
+
+<!-- =========================================================
+     05 · EMBEDDING SPACES
+     ========================================================= -->
+<section id="embeddings">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">05 · Embedding Spaces</span>
+      <h2>When <em>meaning</em> becomes geometry</h2>
+      <p class="section-lede">
+        An embedding is a learned vector that places every item somewhere in a high-dimensional space where
+        &ldquo;similar&rdquo; means &ldquo;nearby.&rdquo; Reduce that space to 2D or 3D, and you get a literal
+        <em>map</em> of your corpus &mdash; the thing that feels most like a galaxy.
+      </p>
+    </div>
+
+    <blockquote class="pullquote">
+      The map is not the territory, but in an embedding space, the territory <em>is</em> a map.
+      <cite class="pullquote-cite">Loosely after Korzybski</cite>
+    </blockquote>
+
+    <h3>Interactive maps to explore</h3>
+    <div class="cards">
+      <a class="card featured" href="https://atlas.nomic.ai/" target="_blank" rel="noopener">
+        <div class="card-title">Nomic Atlas</div>
+        <div class="card-author">Nomic AI</div>
+        <div class="card-desc">Upload a dataset, get a zoomable topic-labeled map. Built on Deepscatter + UMAP + hierarchical topic labels. The closest existing product to what you want.</div>
+        <div class="card-tags"><span class="card-tag hot">study this</span></div>
+      </a>
+      <a class="card featured" href="https://cosmograph.app/" target="_blank" rel="noopener">
+        <div class="card-title">Cosmograph</div>
+        <div class="card-author">OpenJS Foundation</div>
+        <div class="card-desc">Force-sim + embedding renderer. Handles millions of nodes in WebGL. Free JS library + paid hosted app.</div>
+      </a>
+      <a class="card featured" href="https://everynoise.com/" target="_blank" rel="noopener">
+        <div class="card-title">Every Noise at Once</div>
+        <div class="card-author">Glenn McDonald</div>
+        <div class="card-desc">Scatter plot of ~6,000 music genres. Click anywhere, hear the genre. The platonic explorable map.</div>
+        <div class="card-tags"><span class="card-tag hot">inspiration</span></div>
+      </a>
+      <a class="card" href="https://poloclub.github.io/wizmap/" target="_blank" rel="noopener">
+        <div class="card-title">WIZMAP</div>
+        <div class="card-author">Zijie J. Wang (Georgia Tech Polo Club) · 2023</div>
+        <div class="card-desc">Millions of embeddings in a browser. Uses quadtree + level-of-detail. The research prototype behind what Nomic productized.</div>
+      </a>
+      <a class="card" href="https://projector.tensorflow.org/" target="_blank" rel="noopener">
+        <div class="card-title">TensorFlow Embedding Projector</div>
+        <div class="card-author">Google · Smilkov, Thorat</div>
+        <div class="card-desc">Load custom embeddings, run PCA / t-SNE / UMAP in-browser, explore in 3D. The original &ldquo;here&rsquo;s what your embeddings look like&rdquo; tool.</div>
+      </a>
+      <a class="card" href="https://openai.com/research/clip" target="_blank" rel="noopener">
+        <div class="card-title">CLIP space explorers</div>
+        <div class="card-author">Various</div>
+        <div class="card-desc">Projects like clip.reads, aipoly, and various research demos visualizing CLIP image embeddings.</div>
+      </a>
+      <a class="card" href="https://observablehq.com/@nomic-ai/deepscatter" target="_blank" rel="noopener">
+        <div class="card-title">Deepscatter</div>
+        <div class="card-author">Ben Schmidt · Nomic</div>
+        <div class="card-desc">The rendering engine underneath Atlas. Open source. Tile-pyramid streaming of millions of points in WebGL.</div>
+      </a>
+      <a class="card" href="https://www.benschmidt.org/profGender" target="_blank" rel="noopener">
+        <div class="card-title">Ben Schmidt · Rate My Professors</div>
+        <div class="card-author">Ben Schmidt · 2015</div>
+        <div class="card-desc">A founding demo of large-scale text embedding viz before LLMs existed.</div>
+      </a>
+      <a class="card" href="https://anvaka.github.io/map-of-reddit/" target="_blank" rel="noopener">
+        <div class="card-title">Map of Reddit</div>
+        <div class="card-author">Anvaka</div>
+        <div class="card-desc">Subreddits laid out as a Google-Maps-style continental map. Zoomable, labeled, searchable.</div>
+      </a>
+    </div>
+
+    <h3>Dimensionality reduction algorithms</h3>
+    <ul class="concept-list">
+      <li><strong>UMAP</strong><span>Uniform Manifold Approximation and Projection. The current default. Preserves both local and global structure better than t-SNE.</span></li>
+      <li><strong>t-SNE</strong><span>Older. Beautiful local clusters, poor global structure. Mostly superseded by UMAP.</span></li>
+      <li><strong>PaCMAP / TriMap</strong><span>UMAP alternatives with better global structure claims. Worth trying if your UMAP maps feel wrong.</span></li>
+      <li><strong>PCA</strong><span>Linear. Fast. Interpretable axes. Bad for nonlinear manifolds but a necessary first check.</span></li>
+      <li><strong>MDS</strong><span>Classical multidimensional scaling. Preserves pairwise distances. Slow but principled.</span></li>
+      <li><strong>Isomap / LLE</strong><span>Older manifold-learning methods. Still in sklearn; rarely the right answer now.</span></li>
+    </ul>
+
+    <h3>Embedding model options</h3>
+    <div class="lib-list">
+      <div class="lib"><span class="lib-name"><a href="https://docs.voyageai.com/">Voyage AI</a></span><span class="lib-desc">voyage-3 / voyage-3-large. Anthropic&rsquo;s recommended embedding partner. Strong retrieval benchmarks.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://jina.ai/embeddings/">Jina Embeddings</a></span><span class="lib-desc">v3 text, v4 multimodal. Open weights, long context, strong for multilingual.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://platform.openai.com/docs/guides/embeddings">OpenAI embeddings</a></span><span class="lib-desc">text-embedding-3-small / -large. Cheap, fast, good default. Dimensions reducible.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://www.sbert.net/">sentence-transformers</a></span><span class="lib-desc">The Python library for local embeddings. Open-weight models, runs on CPU.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://www.nomic.ai/blog/posts/nomic-embed-text-v1">Nomic Embed</a></span><span class="lib-desc">Fully open-source (training data + weights) embedding model. 768d, 8K context.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://huggingface.co/spaces/mteb/leaderboard">MTEB Leaderboard</a></span><span class="lib-desc">Ranked comparison of every embedding model on retrieval, clustering, classification benchmarks.</span></div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">The critical move: hierarchical topic labels</div>
+      <p>
+        A scatter of 100,000 dots is a blob. What makes Nomic Atlas feel like a map is that it
+        computes clusters at multiple scales, picks a representative phrase for each, and shows
+        those phrases at different zoom levels &mdash; just like cities vs. neighborhoods on
+        Google Maps. The technique: HDBSCAN tree → top-k TF-IDF terms per cluster → label-at-zoom.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     06 · CANVAS & SPATIAL TOOLS
+     ========================================================= -->
+<section id="canvas">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">06 · Canvas &amp; Spatial</span>
+      <h2>The infinite <em>whiteboard</em></h2>
+      <p class="section-lede">
+        Not a graph, not a notebook &mdash; a 2D plane. You drop cards on it, draw arrows between them, write
+        in the margins, group things. This is the level-3 interface of your vision. The tool family has
+        exploded since 2020.
+      </p>
+    </div>
+
+    <h3>Tools to try</h3>
+    <div class="cards">
+      <a class="card featured" href="https://www.tldraw.com/" target="_blank" rel="noopener">
+        <div class="card-title">tldraw</div>
+        <div class="card-author">Steve Ruiz · open-source</div>
+        <div class="card-desc">The cleanest embeddable canvas. Ships as a React component. Custom shapes, rich text, arrows, collab. This is probably what you&rsquo;d build on.</div>
+        <div class="card-tags"><span class="card-tag hot">build on this</span></div>
+      </a>
+      <a class="card featured" href="https://excalidraw.com/" target="_blank" rel="noopener">
+        <div class="card-title">Excalidraw</div>
+        <div class="card-author">Excalidraw team · open-source</div>
+        <div class="card-desc">Hand-drawn whiteboard aesthetic. Huge OSS library. Used by Obsidian plugin, Notion-style embeds, etc.</div>
+      </a>
+      <a class="card featured" href="https://heptabase.com/" target="_blank" rel="noopener">
+        <div class="card-title">Heptabase</div>
+        <div class="card-author">Alan Chan · Taipei</div>
+        <div class="card-desc">Cards on a canvas as the primary note organization. Whiteboards nest. Built specifically for academic research.</div>
+      </a>
+      <a class="card" href="https://scrintal.com/" target="_blank" rel="noopener">
+        <div class="card-title">Scrintal</div>
+        <div class="card-author">Scrintal</div>
+        <div class="card-desc">Mind-map + notes hybrid. Cards with backlinks arranged spatially. Close cousin to Heptabase.</div>
+      </a>
+      <a class="card" href="https://www.figma.com/figjam/" target="_blank" rel="noopener">
+        <div class="card-title">FigJam</div>
+        <div class="card-author">Figma</div>
+        <div class="card-desc">Figma&rsquo;s whiteboard. Sticky notes, stamps, audio huddles. What most product teams use.</div>
+      </a>
+      <a class="card" href="https://miro.com/" target="_blank" rel="noopener">
+        <div class="card-title">Miro</div>
+        <div class="card-author">Miro</div>
+        <div class="card-desc">The enterprise-whiteboard default. Huge template library. API for automation.</div>
+      </a>
+      <a class="card" href="https://www.notion.so/" target="_blank" rel="noopener">
+        <div class="card-title">Notion &mdash; Canvas Block / Mind Map</div>
+        <div class="card-author">Notion Labs</div>
+        <div class="card-desc">Not a primary canvas tool, but their 2025 canvas block crosses doc and whiteboard.</div>
+      </a>
+      <a class="card" href="https://www.muse-app.com/" target="_blank" rel="noopener">
+        <div class="card-title">Muse</div>
+        <div class="card-author">Muse Labs</div>
+        <div class="card-desc">iPad-first infinite canvas. Nested boards, references. Strong opinionated aesthetic.</div>
+      </a>
+      <a class="card" href="https://obsidian.md/canvas" target="_blank" rel="noopener">
+        <div class="card-title">Obsidian Canvas</div>
+        <div class="card-author">Obsidian</div>
+        <div class="card-desc">Open-format infinite canvas inside Obsidian. Drop notes onto it, connect them. JSON file format.</div>
+      </a>
+      <a class="card" href="https://capacities.io/" target="_blank" rel="noopener">
+        <div class="card-title">Capacities</div>
+        <div class="card-author">Capacities · Munich</div>
+        <div class="card-desc">Object-typed notes + graph + canvas. Typed nodes: book, person, idea, etc. Closer in spirit to what you want.</div>
+      </a>
+      <a class="card" href="https://www.siyuan-note.club/" target="_blank" rel="noopener">
+        <div class="card-title">SiYuan</div>
+        <div class="card-author">SiYuan · open-source</div>
+        <div class="card-desc">Chinese block-based note system. Graph, mindmap, outliner, embed view. Self-hostable.</div>
+      </a>
+      <a class="card" href="https://logseq.com/" target="_blank" rel="noopener">
+        <div class="card-title">Logseq</div>
+        <div class="card-author">Logseq · open-source</div>
+        <div class="card-desc">Outliner + graph. Local-first, markdown on disk. Strong among academic note-takers.</div>
+      </a>
+    </div>
+
+    <h3>Rendering / canvas libraries</h3>
+    <div class="lib-list">
+      <div class="lib"><span class="lib-name"><a href="https://tldraw.dev/">tldraw SDK</a></span><span class="lib-desc">React component for the tldraw canvas. Custom shapes, arrows, presence, sync. MIT + commercial license.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://github.com/excalidraw/excalidraw">Excalidraw npm</a></span><span class="lib-desc">The library powering excalidraw.com. Embed in your own app.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://konvajs.org/">Konva.js</a></span><span class="lib-desc">Low-level 2D canvas framework. Shapes, transforms, events. Good when you want primitives.</span></div>
+      <div class="lib"><span class="lib-name"><a href="http://fabricjs.com/">Fabric.js</a></span><span class="lib-desc">Older 2D canvas library with object model. Photoshop-lite functionality.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://pixijs.com/">PixiJS</a></span><span class="lib-desc">WebGL 2D renderer. Built for games but great for performant infinite canvases.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://reactflow.dev/">React Flow (xyflow)</a></span><span class="lib-desc">React-native node editor. If your canvas is really a graph of draggable cards with edges, this is often the fastest way.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://jsplumb.com/">jsPlumb</a></span><span class="lib-desc">Connection-line library. Older, still solid for custom node editors.</span></div>
+    </div>
+
+    <h3>What &ldquo;canvas&rdquo; actually means</h3>
+    <ul class="concept-list">
+      <li><strong>Infinite pan &amp; zoom</strong><span>No page boundary; the plane goes anywhere. Implemented via CSS transform or viewport math.</span></li>
+      <li><strong>Free positioning</strong><span>Objects live at arbitrary (x, y). Not constrained to a grid or flow.</span></li>
+      <li><strong>Edge tools</strong><span>Arrows, labels, sticky-end attachment to shapes that move.</span></li>
+      <li><strong>Multi-selection</strong><span>Lasso, shift-click. Group moves. The affordance that makes rearrangement feel alive.</span></li>
+      <li><strong>Nesting / frames</strong><span>Bounded groups that contain other objects &mdash; in Figma, Muse, tldraw.</span></li>
+      <li><strong>Semantic zoom</strong><span>(Rare but powerful) &mdash; cards show different content at different zoom levels.</span></li>
+    </ul>
+
+    <div class="callout violet">
+      <div class="callout-title">Why this is the right substrate for level 3</div>
+      <p>
+        The canvas gives you <em>spatial memory</em> &mdash; your brain genuinely encodes &ldquo;the
+        2019 ethnography papers are in the top-right.&rdquo; It also gives you ambient structure without
+        forcing a schema. You can build groupings before you know how to name them. For research
+        synthesis, this is priceless.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     07 · SIMULATIONS AS EXPLANATION
+     ========================================================= -->
+<section id="simulations">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">07 · Simulations</span>
+      <h2>When the <em>system</em> is the argument</h2>
+      <p class="section-lede">
+        Some ideas are only clear once you watch them run. Agent-based models, cellular automata, reaction-diffusion,
+        flocking, epidemic curves &mdash; these are explanations that <em>compute</em> in front of you.
+      </p>
+    </div>
+
+    <h3>The canon</h3>
+    <div class="cards">
+      <a class="card featured" href="https://ncase.me/polygons/" target="_blank" rel="noopener">
+        <div class="card-title">Parable of the Polygons</div>
+        <div class="card-author">Case &amp; Hart · 2014</div>
+        <div class="card-desc">Schelling segregation. The clearest &ldquo;individual incentives → aggregate outcomes&rdquo; explainer ever made.</div>
+      </a>
+      <a class="card featured" href="https://meltingasphalt.com/interactive/outbreak/" target="_blank" rel="noopener">
+        <div class="card-title">Outbreak</div>
+        <div class="card-author">Kevin Simler · Melting Asphalt</div>
+        <div class="card-desc">A playable lesson in epidemic networks &mdash; before COVID made it mandatory reading.</div>
+      </a>
+      <a class="card featured" href="https://www.washingtonpost.com/graphics/2020/world/corona-simulator/" target="_blank" rel="noopener">
+        <div class="card-title">Simulitis &mdash; WaPo Coronavirus Simulator</div>
+        <div class="card-author">Harry Stevens · 2020</div>
+        <div class="card-desc">The piece that taught a pandemic. Four flat-earth ball simulations.</div>
+      </a>
+      <a class="card" href="https://www.complexity-explorables.org/" target="_blank" rel="noopener">
+        <div class="card-title">Complexity Explorables</div>
+        <div class="card-author">Dirk Brockmann</div>
+        <div class="card-desc">70+ sims of complex systems: Kuramoto, Vicsek, Ising, SIR, percolation, reaction-diffusion.</div>
+      </a>
+      <a class="card" href="https://www.bit-player.org/extras/voronoi/" target="_blank" rel="noopener">
+        <div class="card-title">Bit-Player (Brian Hayes)</div>
+        <div class="card-author">Brian Hayes · <em>American Scientist</em></div>
+        <div class="card-desc">Decades of playable math essays. Voronoi, cellular automata, number theory.</div>
+      </a>
+      <a class="card" href="https://sambrunacini.com/apps/boids/" target="_blank" rel="noopener">
+        <div class="card-title">Boids / flocking sandboxes</div>
+        <div class="card-author">various &mdash; after Craig Reynolds</div>
+        <div class="card-desc">Reynolds&rsquo; 1987 rules: separation, alignment, cohesion. Every emergent-behavior curriculum includes one.</div>
+      </a>
+      <a class="card" href="https://natureofcode.com/" target="_blank" rel="noopener">
+        <div class="card-title">The Nature of Code</div>
+        <div class="card-author">Daniel Shiffman</div>
+        <div class="card-desc">Book-as-playable-library on simulation &mdash; physics, agents, cellular automata, neural nets. Second edition in p5.js.</div>
+      </a>
+      <a class="card" href="https://playgameoflife.com/" target="_blank" rel="noopener">
+        <div class="card-title">Conway&rsquo;s Game of Life · explorers</div>
+        <div class="card-author">various</div>
+        <div class="card-desc">Gliders, oscillators, spaceships. The original cellular-automaton playground.</div>
+      </a>
+      <a class="card" href="https://pmneila.github.io/jsexp/grayscott/" target="_blank" rel="noopener">
+        <div class="card-title">Gray-Scott Reaction-Diffusion</div>
+        <div class="card-author">Pau Fern&aacute;ndez</div>
+        <div class="card-desc">Paint chemistry reactions that produce spots, stripes, labyrinths. WebGL shader.</div>
+      </a>
+      <a class="card" href="https://ccl.northwestern.edu/netlogo/models/" target="_blank" rel="noopener">
+        <div class="card-title">NetLogo Models Library</div>
+        <div class="card-author">Uri Wilensky · Northwestern CCL</div>
+        <div class="card-desc">Hundreds of agent-based models, now playable in-browser via NetLogo Web.</div>
+      </a>
+      <a class="card" href="https://avarayr.github.io/suboptimal/traffic/" target="_blank" rel="noopener">
+        <div class="card-title">Traffic Waves</div>
+        <div class="card-author">various</div>
+        <div class="card-desc">Stop-and-go phantom traffic jams emerge from driver reaction delays. The classic microsim.</div>
+      </a>
+      <a class="card" href="https://meltingasphalt.com/interactive/going-critical/" target="_blank" rel="noopener">
+        <div class="card-title">Going Critical</div>
+        <div class="card-author">Kevin Simler</div>
+        <div class="card-desc">Percolation, forest fires, infection, ideas. Two long essays built around one interactive lattice.</div>
+      </a>
+    </div>
+
+    <h3>Simulation libraries</h3>
+    <div class="lib-list">
+      <div class="lib"><span class="lib-name"><a href="https://p5js.org/">p5.js</a></span><span class="lib-desc">The friendliest creative-coding library for browser sims. Lauren McCarthy&rsquo;s heir to Processing.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://processing.org/">Processing</a></span><span class="lib-desc">Casey Reas &amp; Ben Fry&rsquo;s language for artists. Java, desktop, the ancestor of p5.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://www.openprocessing.org/">OpenProcessing</a></span><span class="lib-desc">A community of remixable p5 sketches. Browse &rarr; fork &rarr; run.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://matter-js.github.io/matter-js/">Matter.js</a></span><span class="lib-desc">2D physics engine. Rigid-body sims in the browser &mdash; the workhorse behind many playable explainers.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://rapier.rs/">Rapier</a></span><span class="lib-desc">Rust physics engine with WASM bindings. Fast, deterministic, the modern Matter alternative.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://github.com/regl-project/regl">regl</a></span><span class="lib-desc">Functional WebGL. Great for GPU sims &mdash; reaction-diffusion, flocking at scale.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://ccl.northwestern.edu/netlogo/">NetLogo</a></span><span class="lib-desc">The agent-based-modeling teaching language. 25+ years old and still the easiest way to write one.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://hashai.substack.com/">HASH</a></span><span class="lib-desc">Web-based agent-based sim platform. Like NetLogo for the browser.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://mesa.readthedocs.io/">Mesa</a></span><span class="lib-desc">Python ABM framework. Great for research-grade sims with reproducible outputs.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     08 · ZOOM AND MULTI-SCALE INTERFACES
+     ========================================================= -->
+<section id="zoom">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">08 · Zoom &amp; Multi-scale</span>
+      <h2>One camera, many <em>altitudes</em></h2>
+      <p class="section-lede">
+        The core idea behind your whole tool is here. A zoomable UI (ZUI) is one that treats every datum as
+        positioned in space, with level-of-detail rendering that swaps out representations as you zoom. The
+        lineage runs from Pad/Pad++ through Google Maps to Prezi, Figma, Nomic Atlas, and Deck.gl tile layers.
+      </p>
+    </div>
+
+    <!-- Zoom demo -->
+    <div class="demo-box">
+      <span class="demo-label">Live · 4-level zoom demo</span>
+      <p style="margin-top: 0; margin-bottom: 1rem;"><strong>Click through the four levels</strong> &mdash; a miniature version of what the tool should feel like.</p>
+      <div id="zoom-demo">
+        <div class="zoom-controls">
+          <button class="zoom-btn" data-zoom="1">01 · Universe</button>
+          <button class="zoom-btn" data-zoom="2">02 · Cluster</button>
+          <button class="zoom-btn" data-zoom="3">03 · Canvas</button>
+          <button class="zoom-btn" data-zoom="4">04 · Detail</button>
+        </div>
+        <div class="zoom-viewport">
+          <div class="zoom-level" data-zoom="1">
+            <div class="l1-bg"></div>
+            <span class="l1-label" style="top: 28%; left: 18%;">Perception</span>
+            <span class="l1-label" style="top: 48%; left: 62%;">Networks</span>
+            <span class="l1-label" style="top: 68%; left: 38%;">Systems</span>
+            <span class="l1-label" style="top: 18%; left: 72%;">Aesthetics</span>
+            <span class="l1-label" style="top: 62%; left: 8%;">Methods</span>
+          </div>
+          <div class="zoom-level" data-zoom="2">
+            <div class="l2-stage">
+              <div class="l2-node" style="top: 30%; left: 40%;"></div>
+              <div class="l2-node" style="top: 45%; left: 55%;"></div>
+              <div class="l2-node" style="top: 60%; left: 35%;"></div>
+              <div class="l2-node" style="top: 25%; left: 65%;"></div>
+              <div class="l2-node" style="top: 70%; left: 50%;"></div>
+              <div class="l2-node" style="top: 38%; left: 28%;"></div>
+              <div class="l2-node" style="top: 52%; left: 72%;"></div>
+              <div class="l2-node" style="top: 22%; left: 50%;"></div>
+              <div class="l2-node" style="top: 68%; left: 22%;"></div>
+              <div class="l2-node" style="top: 42%; left: 45%;"></div>
+              <span class="l1-label" style="top: 5%; left: 50%; transform: translateX(-50%);">NETWORKS · 43 items</span>
+            </div>
+          </div>
+          <div class="zoom-level" data-zoom="3">
+            <div class="l3-cards">
+              <div class="l3-card"><div class="l3-card-title">Leiden community detection</div>paper · Traag 2019</div>
+              <div class="l3-card"><div class="l3-card-title">Force-directed layouts</div>concept · Fruchterman &amp; Reingold</div>
+              <div class="l3-card"><div class="l3-card-title">Cosmograph case study</div>note · 2026-03-12</div>
+              <div class="l3-card"><div class="l3-card-title">Conversation w/ A.K.</div>people · lab meeting</div>
+              <div class="l3-card"><div class="l3-card-title">Graph viz ≠ graph data</div>idea · unfinished</div>
+              <div class="l3-card"><div class="l3-card-title">Open Knowledge Maps</div>tool · reviewed</div>
+            </div>
+          </div>
+          <div class="zoom-level" data-zoom="4">
+            <div class="l4-detail">
+              <div class="l4-body">
+                <div class="meta">paper · 2019 · in-library</div>
+                <div class="l4-title">From Louvain to Leiden: guaranteeing well-connected communities</div>
+                <p>Traag, Waltman, van Eck. <em>Scientific Reports</em> 9. The paper that replaced Louvain as the default
+                community-detection algorithm. Key insight: Louvain occasionally produces disconnected communities;
+                Leiden proves they never will.</p>
+                <p style="margin-top: 1rem; font-family: var(--mono); font-size: 0.75rem; color: var(--ink-mute);">
+                  Linked to &mdash; <span class="accent">6 papers</span> · <span class="cyan">3 ideas</span> · <span class="magenta">2 notes</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="small muted" style="margin-top: 0.75rem;">
+        A miniature, fake version of the level-switching you want. Real implementations swap content at
+        zoom-threshold scales <em>k</em>, interpolating between representations.
+      </p>
+    </div>
+
+    <h3>Canonical zoomable interfaces</h3>
+    <div class="cards">
+      <a class="card featured" href="https://www.google.com/maps" target="_blank" rel="noopener">
+        <div class="card-title">Google Maps</div>
+        <div class="card-author">Google · 2005&ndash;</div>
+        <div class="card-desc">The ZUI that taught everyone. Tile pyramid, vector tiles, semantic zoom (city names &rarr; streets &rarr; shops).</div>
+        <div class="card-tags"><span class="card-tag">seminal</span></div>
+      </a>
+      <a class="card featured" href="https://prezi.com/" target="_blank" rel="noopener">
+        <div class="card-title">Prezi</div>
+        <div class="card-author">Prezi · 2009</div>
+        <div class="card-desc">Presentations as zooming across an infinite plane instead of slides. Overdone, but important conceptually.</div>
+      </a>
+      <a class="card" href="https://www.figma.com/" target="_blank" rel="noopener">
+        <div class="card-title">Figma</div>
+        <div class="card-author">Figma</div>
+        <div class="card-desc">UI design tool where your entire workspace is one zoomable plane. Spatial memory is the feature.</div>
+      </a>
+      <a class="card" href="https://atlas.nomic.ai/" target="_blank" rel="noopener">
+        <div class="card-title">Nomic Atlas (again)</div>
+        <div class="card-author">Nomic AI</div>
+        <div class="card-desc">Study this specifically for its zoom behavior. Labels swap, density fades, individual points appear.</div>
+      </a>
+      <a class="card" href="https://openseadragon.github.io/" target="_blank" rel="noopener">
+        <div class="card-title">OpenSeadragon</div>
+        <div class="card-author">OpenSeadragon team</div>
+        <div class="card-desc">Deep-zoom image viewer. Used by museums for gigapixel artwork. Pyramid of pre-rendered tiles.</div>
+      </a>
+      <a class="card" href="https://en.wikipedia.org/wiki/Pad%2B%2B" target="_blank" rel="noopener">
+        <div class="card-title">Pad / Pad++</div>
+        <div class="card-author">Ken Perlin, Jim Hollan, Ben Bederson · 1991&ndash;1996</div>
+        <div class="card-desc">The research ZUIs that preceded everything here. Semantic zoom as a research concept was defined in this work.</div>
+      </a>
+      <a class="card" href="https://earth.google.com/" target="_blank" rel="noopener">
+        <div class="card-title">Google Earth</div>
+        <div class="card-author">Google</div>
+        <div class="card-desc">Multi-scale 3D: space → continents → buildings → interior. The aesthetic benchmark for a zoomable knowledge universe.</div>
+      </a>
+      <a class="card" href="https://worldview.earthdata.nasa.gov/" target="_blank" rel="noopener">
+        <div class="card-title">NASA Worldview</div>
+        <div class="card-author">NASA</div>
+        <div class="card-desc">Real-time satellite imagery as a time-sliced zoomable map. Tile pyramid + temporal slider.</div>
+      </a>
+      <a class="card" href="https://www.mapbox.com/" target="_blank" rel="noopener">
+        <div class="card-title">Mapbox</div>
+        <div class="card-author">Mapbox</div>
+        <div class="card-desc">Vector-tile map platform. MVT + expressive style language. Levels of detail can be styled per zoom.</div>
+      </a>
+      <a class="card" href="https://deck.gl/" target="_blank" rel="noopener">
+        <div class="card-title">deck.gl</div>
+        <div class="card-author">Uber Visualization</div>
+        <div class="card-desc">Large-scale WebGL visualization. TileLayer for your own tile pyramids, H3 hexes, arcs, screen-grid, etc.</div>
+      </a>
+    </div>
+
+    <h3>Techniques that make zoom feel like zoom</h3>
+    <ul class="concept-list">
+      <li><strong>Tile pyramids</strong><span>Precompute images or vector data at each zoom level <em>z</em>. Serve only visible tiles.</span></li>
+      <li><strong>Quadtree spatial indexing</strong><span>Query &ldquo;points visible at this viewport&rdquo; in O(log n). How Deepscatter handles millions of dots.</span></li>
+      <li><strong>Supercluster</strong><span>Mapbox&rsquo;s hierarchical-cluster library for point data. Handles millions of markers.</span></li>
+      <li><strong>Semantic zoom</strong><span>Not just bigger &mdash; <em>different</em>. A cluster at z=0 becomes a list of papers at z=5.</span></li>
+      <li><strong>Level-of-detail (LOD) swaps</strong><span>Discrete threshold: below k=2 show density heatmap, above show points.</span></li>
+      <li><strong>FLIP animations</strong><span>First-Last-Invert-Play. Animate layout changes by recording before/after and interpolating.</span></li>
+      <li><strong>Matched geometry</strong><span>An element transforms into a different element at another scale (iOS hero animations, Framer Motion <code>layoutId</code>).</span></li>
+      <li><strong>Focus+context</strong><span>Furnas&rsquo; Degree-of-Interest. Magnify the focus, compress the context. Fisheye views.</span></li>
+      <li><strong>Progressive disclosure</strong><span>Shneiderman&rsquo;s mantra: overview first, zoom and filter, then details-on-demand.</span></li>
+    </ul>
+
+    <h3>Zoom-friendly libraries</h3>
+    <div class="lib-list">
+      <div class="lib"><span class="lib-name"><a href="https://d3js.org/d3-zoom">d3-zoom</a></span><span class="lib-desc">The foundational pan/zoom behavior in the D3 ecosystem. Pairs with <code>d3-quadtree</code> for performance.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://github.com/mapbox/supercluster">Supercluster</a></span><span class="lib-desc">Hierarchical greedy clustering for point data. The Mapbox workhorse.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://deck.gl/docs/api-reference/geo-layers/tile-layer">deck.gl TileLayer</a></span><span class="lib-desc">Your-own-tile-pyramid support. Custom loaders, LOD, WebGL rendering at millions of items.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://github.com/nomic-ai/deepscatter">Deepscatter</a></span><span class="lib-desc">Arrow-backed quadtree streaming. The open-source engine behind Nomic Atlas.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://openseadragon.github.io/">OpenSeadragon</a></span><span class="lib-desc">Deep-zoom image viewer. Read its docs even if you don&rsquo;t use it &mdash; canonical ZUI patterns.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://maplibre.org/">MapLibre GL</a></span><span class="lib-desc">Open-source fork of Mapbox GL. Vector tiles, custom styles, interaction events.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://motion.dev/docs/react-layout-animations">Motion layout animations</a></span><span class="lib-desc">Framer Motion&rsquo;s <code>layoutId</code>. Key to Hero-style level transitions.</span></div>
+    </div>
+
+    <blockquote class="pullquote">
+      Overview first, zoom and filter, then details-on-demand.
+      <cite class="pullquote-cite">Ben Shneiderman · 1996</cite>
+    </blockquote>
+
+    <div class="callout cyan">
+      <div class="callout-title">Furnas&rsquo; Degree-of-Interest, in plain English</div>
+      <p>
+        For every item, compute <strong>DOI = Intrinsic importance &minus; Distance from focus</strong>. Show
+        items whose DOI exceeds some threshold. This is the math behind good focus+context views &mdash; it
+        tells you <em>which</em> items deserve space at a given zoom, and <em>which</em> can compress into a
+        cluster dot.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     09 · SENSE-OF-SCALE PIECES
+     ========================================================= -->
+<section id="scale">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">09 · Sense-of-Scale</span>
+      <h2>The cosmic scroll &mdash; when <em>size</em> is the story</h2>
+      <p class="section-lede">
+        A sub-genre worth naming on its own. These are pieces whose whole trick is: scroll, and the number
+        gets almost impossibly bigger or smaller. The universe-feel you asked for lives here. They&rsquo;re
+        also very cheap to make &mdash; a thousand-pixel scroll, done right, produces awe.
+      </p>
+    </div>
+
+    <h3>The canon</h3>
+    <div class="cards">
+      <a class="card featured" href="https://neal.fun/deep-sea/" target="_blank" rel="noopener">
+        <div class="card-title">The Deep Sea</div>
+        <div class="card-author">Neal Agarwal · neal.fun</div>
+        <div class="card-desc">Scroll from sea level to the Mariana Trench. Each creature appears at its real depth. Haunting.</div>
+        <div class="card-tags"><span class="card-tag hot">must-see</span></div>
+      </a>
+      <a class="card featured" href="https://neal.fun/size-of-space/" target="_blank" rel="noopener">
+        <div class="card-title">The Size of Space</div>
+        <div class="card-author">Neal Agarwal · neal.fun</div>
+        <div class="card-desc">A Boeing 747 → Mount Everest → Earth → the Sun → the Milky Way. Right-arrow your way to the observable universe.</div>
+      </a>
+      <a class="card featured" href="https://htwins.net/scale2/" target="_blank" rel="noopener">
+        <div class="card-title">Scale of the Universe 2</div>
+        <div class="card-author">Cary &amp; Michael Huang · 2012</div>
+        <div class="card-desc">The original. Slider from the Planck length to the observable universe. A fundamental explorable.</div>
+      </a>
+      <a class="card" href="https://stars.chromeexperiments.com/" target="_blank" rel="noopener">
+        <div class="card-title">100,000 Stars</div>
+        <div class="card-author">Google Chrome Experiments</div>
+        <div class="card-desc">WebGL fly-through of nearby stars. Zoom tiers: sun → neighbors → galaxy.</div>
+      </a>
+      <a class="card" href="https://www.kurzgesagt.org/" target="_blank" rel="noopener">
+        <div class="card-title">Kurzgesagt &mdash; Cosmic Calendar</div>
+        <div class="card-author">Carl Sagan, Neil deGrasse Tyson</div>
+        <div class="card-desc">The universe as one year. Every human civilization in the last 14 seconds. A template for comparative-time pieces.</div>
+      </a>
+      <a class="card" href="https://stellarium-web.org/" target="_blank" rel="noopener">
+        <div class="card-title">Stellarium Web</div>
+        <div class="card-author">Stellarium</div>
+        <div class="card-desc">The night sky rendered live. Zoom into a constellation, then into a star.</div>
+      </a>
+      <a class="card" href="https://mbostock.github.io/d3/talk/20111018/calendar.html" target="_blank" rel="noopener">
+        <div class="card-title">Bostock &mdash; Calendar heatmaps</div>
+        <div class="card-author">Mike Bostock · D3 gallery</div>
+        <div class="card-desc">Not a scale piece, but a multi-temporal rendering that shows how one pattern lives across scales.</div>
+      </a>
+      <a class="card" href="https://www.informationisbeautiful.net/visualizations/the-billion-dollar-o-gram-2009/" target="_blank" rel="noopener">
+        <div class="card-title">Billion Dollar o-Gram</div>
+        <div class="card-author">David McCandless · Information is Beautiful</div>
+        <div class="card-desc">A treemap that makes billion-dollar quantities commensurable. The &ldquo;compare scales&rdquo; archetype.</div>
+      </a>
+      <a class="card" href="https://waitbutwhy.com/2014/05/fermi-paradox.html" target="_blank" rel="noopener">
+        <div class="card-title">The Fermi Paradox</div>
+        <div class="card-author">Tim Urban · Wait But Why</div>
+        <div class="card-desc">Not interactive, but the canonical long-scroll-for-cosmic-scale piece. Informs Neal Agarwal&rsquo;s whole oeuvre.</div>
+      </a>
+      <a class="card" href="https://neal.fun/" target="_blank" rel="noopener">
+        <div class="card-title">neal.fun · index</div>
+        <div class="card-author">Neal Agarwal</div>
+        <div class="card-desc">Browse the full site. Spend an evening. The single best working example of the aesthetic you&rsquo;re after.</div>
+      </a>
+    </div>
+
+    <h3>What makes these work</h3>
+    <ul class="concept-list">
+      <li><strong>Logarithmic progression</strong><span>Linear scroll, log-scale content. Each pixel roughly doubles the number.</span></li>
+      <li><strong>Anchor items at every decade</strong><span>Something familiar at 10⁰, 10³, 10⁶ &mdash; otherwise you lose the reader.</span></li>
+      <li><strong>Musical pacing</strong><span>Neal Agarwal uses ambient audio and cut-backs to break monotony.</span></li>
+      <li><strong>No text until needed</strong><span>Text appears only at its scale&rsquo;s item. Silence in between.</span></li>
+      <li><strong>One mechanic</strong><span>The reader never has to learn a second input. Just keep scrolling / pressing right.</span></li>
+    </ul>
+
+    <div class="callout">
+      <div class="callout-title">Why this belongs at level 1 of your tool</div>
+      <p>
+        When a user first lands at the universe view, something cosmic should happen &mdash; a slow zoom-out
+        from a single familiar idea (their most recent note) into the whole galaxy of their knowledge. Not
+        interactive at that moment, just a short reveal. It primes the spatial metaphor that the rest of
+        the interface trades on.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     10 · DATA ART
+     ========================================================= -->
+<section id="art">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">10 · Data Art</span>
+      <h2>When the aesthetic <em>is</em> the argument</h2>
+      <p class="section-lede">
+        Not every visualization exists to inform. Some exist to feel, provoke, mourn, celebrate. A short tour
+        of the data-art tradition &mdash; from Aaron Koblin&rsquo;s flight paths to Refik Anadol&rsquo;s data
+        sculptures &mdash; because it shapes the visual language you&rsquo;ll end up adopting.
+      </p>
+    </div>
+
+    <h3>Artists &amp; studios</h3>
+    <div class="cards">
+      <a class="card featured" href="https://refikanadol.com/" target="_blank" rel="noopener">
+        <div class="card-title">Refik Anadol</div>
+        <div class="card-author">Los Angeles · data sculpture</div>
+        <div class="card-desc">Machine Hallucinations, Living Archive. Giant architectural projections driven by latent-space walks. The aesthetic ceiling for &ldquo;ML-as-art.&rdquo;</div>
+        <div class="card-tags"><span class="card-tag hot">aesthetic ref</span></div>
+      </a>
+      <a class="card featured" href="http://www.aaronkoblin.com/" target="_blank" rel="noopener">
+        <div class="card-title">Aaron Koblin</div>
+        <div class="card-author">Flight Patterns, The Wilderness Downtown</div>
+        <div class="card-desc">North-American flights as a glowing circulatory system. One of the single best pieces of data art ever made.</div>
+      </a>
+      <a class="card featured" href="https://www.giorgialupi.com/" target="_blank" rel="noopener">
+        <div class="card-title">Giorgia Lupi</div>
+        <div class="card-author">Pentagram partner · NYC</div>
+        <div class="card-desc">Dear Data. Hand-drawn charts about her daily life sent as postcards with Stefanie Posavec. Founded Data Humanism.</div>
+      </a>
+      <a class="card" href="https://www.visualcinnamon.com/" target="_blank" rel="noopener">
+        <div class="card-title">Nadieh Bremer &mdash; Visual Cinnamon</div>
+        <div class="card-author">Amsterdam · solo studio</div>
+        <div class="card-desc">Data art that&rsquo;s also useful. Exoplanets, Data Sketches, commissions for Google, Scientific American.</div>
+      </a>
+      <a class="card" href="https://shirleywu.studio/" target="_blank" rel="noopener">
+        <div class="card-title">Shirley Wu</div>
+        <div class="card-author">San Francisco</div>
+        <div class="card-desc">Co-author with Bremer on Data Sketches. Now does Legends, a viz-per-musical-artist project.</div>
+      </a>
+      <a class="card" href="https://kirellbenzi.com/" target="_blank" rel="noopener">
+        <div class="card-title">Kirell Benzi</div>
+        <div class="card-author">France · data artist</div>
+        <div class="card-desc">Network-viz art. Star Wars character galaxies, Wikipedia structure, scientific citation networks.</div>
+      </a>
+      <a class="card" href="https://feltron.com/" target="_blank" rel="noopener">
+        <div class="card-title">Nicholas Felton</div>
+        <div class="card-author">Feltron Annual Report &middot; ex-Facebook</div>
+        <div class="card-desc">Quantified-self pioneer. 2005&ndash;2014 annual reports of his own life. Print-era data narrative done right.</div>
+      </a>
+      <a class="card" href="https://selfiecity.net/" target="_blank" rel="noopener">
+        <div class="card-title">Lev Manovich &mdash; Selfiecity / On Broadway</div>
+        <div class="card-author">Cultural Analytics Lab</div>
+        <div class="card-desc">Thousands of selfies arranged by city, age, pose. Art history&rsquo;s distant-reading moment.</div>
+      </a>
+      <a class="card" href="https://dataphys.org/list/" target="_blank" rel="noopener">
+        <div class="card-title">Data Physicalization Wiki</div>
+        <div class="card-author">Dragicevic, Jansen, Moere</div>
+        <div class="card-desc">Nearly 400 physical-data artifacts catalogued. Sculptures, weavings, edibles, architecture.</div>
+      </a>
+      <a class="card" href="https://truth-and-beauty.net/" target="_blank" rel="noopener">
+        <div class="card-title">Moritz Stefaner · Truth &amp; Beauty</div>
+        <div class="card-author">Data visualization &ldquo;consultant&rdquo;</div>
+        <div class="card-desc">Peak Spotting (rail congestion for DB), OECD Better Life Index. High-gloss analytical beauty.</div>
+      </a>
+      <a class="card" href="https://www.santiagoortiz.com/" target="_blank" rel="noopener">
+        <div class="card-title">Santiago Ortiz</div>
+        <div class="card-author">Moebio Labs</div>
+        <div class="card-desc">Prolific explorations of networks, complexity, meaning. Intense visual style.</div>
+      </a>
+      <a class="card" href="https://research.google.com/bigpicture/" target="_blank" rel="noopener">
+        <div class="card-title">Google Big Picture group</div>
+        <div class="card-author">Viégas &amp; Wattenberg</div>
+        <div class="card-desc">Wind Map, Flu Trends, Name Voyager. Research-as-art that also ran at Google scale.</div>
+      </a>
+    </div>
+
+    <h3>Aesthetic vocabularies to borrow</h3>
+    <ul class="concept-list">
+      <li><strong>Ink-on-dark</strong><span>The cartographic register. Warm highlights on deep blue-black. Anadol, Koblin, most of this site.</span></li>
+      <li><strong>Paper + pen</strong><span>Dear Data, Lupi, hand-drawn charts. Warmth, irregularity, legibility.</span></li>
+      <li><strong>Neon / cyber</strong><span>Benzi, synthwave viz. Bright hues on near-black. Good for networks.</span></li>
+      <li><strong>Stained glass / maximal</strong><span>Bremer&rsquo;s side. Saturated, ornamental, many-layered.</span></li>
+      <li><strong>Editorial / print</strong><span>SCMP, the FT, NYT. Serif display, grid, restrained color. Your &ldquo;credible&rdquo; mode.</span></li>
+      <li><strong>Blueprint / schematic</strong><span>Thin white lines on blue, or vice versa. Carries engineering authority.</span></li>
+      <li><strong>Generative / algorithmic</strong><span>fxhash, Artblocks. Procedural shapes that evoke natural form.</span></li>
+    </ul>
+
+    <details>
+      <summary>Awards / galleries worth browsing</summary>
+      <div class="cards">
+        <a class="card" href="https://www.informationisbeautifulawards.com/" target="_blank" rel="noopener"><div class="card-title">IIB Awards</div><div class="card-author">Annual</div><div class="card-desc">The big annual data-viz showcase.</div></a>
+        <a class="card" href="https://www.kantar.com/campaigns/information-is-beautiful-awards/shortlist-2024" target="_blank" rel="noopener"><div class="card-title">Kantar IIB Shortlist</div><div class="card-author">2024/25</div><div class="card-desc">Hundreds of recent pieces with short writeups.</div></a>
+        <a class="card" href="https://www.siggraph.org/" target="_blank" rel="noopener"><div class="card-title">SIGGRAPH Art Papers</div><div class="card-author">ACM</div><div class="card-desc">Decades of the academic graphics-as-art tradition.</div></a>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- =========================================================
+     11 · RESEARCH TOOLS (the existing landscape for academics)
+     ========================================================= -->
+<section id="tools">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">11 · Research Tools</span>
+      <h2>Tools built specifically for <em>academic</em> discovery</h2>
+      <p class="section-lede">
+        A more practical section. If you&rsquo;re building a personal research map, you should know what&rsquo;s
+        already in this space &mdash; so you know what to integrate with, where the APIs are, and what not to
+        re-invent. Most of these are complementary to the tool you&rsquo;re imagining.
+      </p>
+    </div>
+
+    <h3>Discovery &amp; citation-graph tools</h3>
+    <div class="cards">
+      <a class="card featured" href="https://www.connectedpapers.com/" target="_blank" rel="noopener">
+        <div class="card-title">Connected Papers</div>
+        <div class="card-author">Israel · freemium</div>
+        <div class="card-desc">Co-citation-based paper neighborhoods. Expand connected papers outward; prior/derivative branches.</div>
+      </a>
+      <a class="card featured" href="https://www.litmaps.com/" target="_blank" rel="noopener">
+        <div class="card-title">Litmaps</div>
+        <div class="card-author">New Zealand · subscription</div>
+        <div class="card-desc">Seed papers → timeline + graph map. Citation monitoring + recommendations.</div>
+      </a>
+      <a class="card featured" href="https://www.researchrabbit.ai/" target="_blank" rel="noopener">
+        <div class="card-title">Research Rabbit</div>
+        <div class="card-author">free</div>
+        <div class="card-desc">Collection-first. Find similar / earlier / later work. Excellent Zotero integration.</div>
+      </a>
+      <a class="card" href="https://www.semanticscholar.org/" target="_blank" rel="noopener">
+        <div class="card-title">Semantic Scholar</div>
+        <div class="card-author">Allen Institute for AI</div>
+        <div class="card-desc">200M+ papers, TLDRs, citation graph. Free API (<a href="https://api.semanticscholar.org/">docs</a>) that&rsquo;s a building block for most tools in this list.</div>
+      </a>
+      <a class="card" href="https://openalex.org/" target="_blank" rel="noopener">
+        <div class="card-title">OpenAlex</div>
+        <div class="card-author">OurResearch · free</div>
+        <div class="card-desc">Successor to Microsoft Academic Graph. 250M+ scholarly works, open API, full dump available. The data you&rsquo;d want.</div>
+        <div class="card-tags"><span class="card-tag hot">build on</span></div>
+      </a>
+      <a class="card" href="https://elicit.com/" target="_blank" rel="noopener">
+        <div class="card-title">Elicit</div>
+        <div class="card-author">Elicit · freemium</div>
+        <div class="card-desc">LLM over 125M papers. Ask a research question, get a table of papers answering it with extracted fields.</div>
+      </a>
+      <a class="card" href="https://inciteful.xyz/" target="_blank" rel="noopener">
+        <div class="card-title">Inciteful</div>
+        <div class="card-author">free</div>
+        <div class="card-desc">No-login paper discovery. Two tools: Paper Discovery and Literature Connector.</div>
+      </a>
+      <a class="card" href="https://scite.ai/" target="_blank" rel="noopener">
+        <div class="card-title">Scite</div>
+        <div class="card-author">Scite · paid</div>
+        <div class="card-desc">Smart citations &mdash; does the citing paper <em>support</em>, <em>contrast</em>, or just <em>mention</em> the cited one?</div>
+      </a>
+      <a class="card" href="https://scholar.google.com/" target="_blank" rel="noopener">
+        <div class="card-title">Google Scholar</div>
+        <div class="card-author">Google</div>
+        <div class="card-desc">Still the default search. &ldquo;Cited by&rdquo; and alerts are the killer features. No API.</div>
+      </a>
+      <a class="card" href="https://www.zotero.org/" target="_blank" rel="noopener">
+        <div class="card-title">Zotero</div>
+        <div class="card-author">Corp. for Digital Scholarship</div>
+        <div class="card-desc">Open-source reference manager. Rich <a href="https://www.zotero.org/support/dev/web_api/v3/start">API</a>. Your pre-existing library, if you have one.</div>
+      </a>
+      <a class="card" href="https://www.paperpile.com/" target="_blank" rel="noopener">
+        <div class="card-title">Paperpile</div>
+        <div class="card-author">Paperpile · subscription</div>
+        <div class="card-desc">Cloud-native Zotero alternative. Cleaner UI, Google Docs integration.</div>
+      </a>
+      <a class="card" href="https://obsidian.md/" target="_blank" rel="noopener">
+        <div class="card-title">Obsidian + research plugins</div>
+        <div class="card-author">Obsidian</div>
+        <div class="card-desc">Citations plugin + Literature Note Templater + Graph view. The DIY researcher&rsquo;s stack.</div>
+      </a>
+    </div>
+
+    <h3>AI reading / summary tools</h3>
+    <div class="cards">
+      <a class="card" href="https://typeset.io/" target="_blank" rel="noopener">
+        <div class="card-title">SciSpace</div>
+        <div class="card-author">SciSpace</div>
+        <div class="card-desc">Chat-with-PDF for papers. Inline explanations of equations and jargon.</div>
+      </a>
+      <a class="card" href="https://consensus.app/" target="_blank" rel="noopener">
+        <div class="card-title">Consensus</div>
+        <div class="card-author">Consensus</div>
+        <div class="card-desc">Yes/no/mixed question answering backed by paper quotes.</div>
+      </a>
+      <a class="card" href="https://undermind.ai/" target="_blank" rel="noopener">
+        <div class="card-title">Undermind</div>
+        <div class="card-author">Undermind · MIT</div>
+        <div class="card-desc">Agentic lit search. Slower (minutes) but does multi-step retrieval.</div>
+      </a>
+      <a class="card" href="https://notebooklm.google/" target="_blank" rel="noopener">
+        <div class="card-title">NotebookLM</div>
+        <div class="card-author">Google</div>
+        <div class="card-desc">Upload your corpus, ask questions, generate an audio podcast of the sources. Surprisingly useful.</div>
+      </a>
+      <a class="card" href="https://claude.ai/projects" target="_blank" rel="noopener">
+        <div class="card-title">Claude Projects</div>
+        <div class="card-author">Anthropic</div>
+        <div class="card-desc">Upload a stack of PDFs. Long-context retrieval. The closest off-the-shelf analog to what you&rsquo;d build locally.</div>
+      </a>
+    </div>
+
+    <h3>PDF / document pipelines</h3>
+    <div class="lib-list">
+      <div class="lib"><span class="lib-name"><a href="https://mozilla.github.io/pdf.js/">pdf.js</a></span><span class="lib-desc">Mozilla&rsquo;s in-browser PDF renderer. Text-extraction layer on top of a canvas.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://grobid.readthedocs.io/">GROBID</a></span><span class="lib-desc">Extract structured bibliography + full TEI XML from a paper PDF. The open-source gold standard.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://docling-project.github.io/docling/">Docling</a></span><span class="lib-desc">IBM&rsquo;s newer PDF/Word/HTML parser to Markdown. AI-trained layout model.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://github.com/Unstructured-IO/unstructured">unstructured.io</a></span><span class="lib-desc">PDF/HTML/PPT → clean chunks. The RAG-pipeline default.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://github.com/VikParuchuri/marker">Marker</a></span><span class="lib-desc">PDF → Markdown, specializing in scientific papers. Handles equations, tables.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://github.com/allenai/s2orc-doc2json">S2ORC-doc2json</a></span><span class="lib-desc">Allen AI&rsquo;s scientific-paper parser. The pipeline behind Semantic Scholar.</span></div>
+    </div>
+
+    <div class="callout magenta">
+      <div class="callout-title">The opportunity in a sentence</div>
+      <p>
+        None of these tools do all of: multiple entity types, personal/editable corpus, embeddings + explicit
+        graph, beautiful zoomable front-end, deployed on the web. Pick two adjacent tools, stitch their APIs,
+        add the UI &mdash; you&rsquo;re 80% of the way to the thing you want.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     12 · LIBRARIES — the full building-block reference
+     ========================================================= -->
+<section id="libraries">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">12 · Libraries</span>
+      <h2>Every <em>building block</em> you&rsquo;ll likely reach for</h2>
+      <p class="section-lede">
+        A consolidated reference. Rather than re-list everything from the earlier sections, the categories below
+        group libraries by what they <em>do</em> &mdash; so when you reach a sub-problem, you know what to
+        evaluate. Links go to docs.
+      </p>
+    </div>
+
+    <h3>Frameworks &amp; meta-tools</h3>
+    <div class="lib-list">
+      <div class="lib"><span class="lib-name"><a href="https://nextjs.org/">Next.js</a></span><span class="lib-desc">React meta-framework. Probably your default for a deployed app with SSR + API routes.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://astro.build/">Astro</a></span><span class="lib-desc">Content-first static framework. Great when your site is mostly articles with islands of interactivity.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://kit.svelte.dev/">SvelteKit</a></span><span class="lib-desc">The Svelte meta-framework. Small bundles, reactive-by-default. The Pudding&rsquo;s pick.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://observablehq.com/framework/">Observable Framework</a></span><span class="lib-desc">Data-first SSG. Markdown + dataloaders in any language + reactive JS cells.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://tauri.app/">Tauri</a></span><span class="lib-desc">Rust-backed desktop app wrapper. Smaller and faster than Electron. If you want local-first native.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://www.electronjs.org/">Electron</a></span><span class="lib-desc">Classic cross-platform wrapper. The Obsidian, VS Code foundation.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://remix.run/">Remix</a></span><span class="lib-desc">Loader-pattern React meta-framework. Now part of React Router v7.</span></div>
+    </div>
+
+    <h3>2D / SVG rendering</h3>
+    <div class="lib-list">
+      <div class="lib"><span class="lib-name"><a href="https://d3js.org/">D3</a></span><span class="lib-desc">The foundational data-viz library. Scales, shapes, axes, forces, projections. Composable, not declarative.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://observablehq.com/plot/">Observable Plot</a></span><span class="lib-desc">Layered-grammar high-level API over D3. Much faster for common charts.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://vega.github.io/vega-lite/">Vega-Lite</a></span><span class="lib-desc">Declarative JSON grammar for charts. Used by Jupyter, Observable, many dashboards.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://airbnb.io/visx/">visx</a></span><span class="lib-desc">Airbnb&rsquo;s D3-primitives-as-React-components set. Good for React apps that need custom charts.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://recharts.org/">Recharts</a></span><span class="lib-desc">Opinionated React chart library. Less flexible, far less code.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://www.chartjs.org/">Chart.js</a></span><span class="lib-desc">The classic simple-charts library. Canvas-based, small, ubiquitous.</span></div>
+    </div>
+
+    <h3>WebGL / GPU rendering</h3>
+    <div class="lib-list">
+      <div class="lib"><span class="lib-name"><a href="https://threejs.org/">Three.js</a></span><span class="lib-desc">The dominant 3D library. WebGL / WebGPU. Everything from product configurators to full games.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://r3f.docs.pmnd.rs/">react-three-fiber</a></span><span class="lib-desc">React bindings for Three. Declarative scene graphs. Pairs with Drei (utilities).</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://www.babylonjs.com/">Babylon.js</a></span><span class="lib-desc">Microsoft&rsquo;s 3D engine. Stronger physics, AR/VR, engine-grade features. Typescript-first.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://pixijs.com/">PixiJS</a></span><span class="lib-desc">2D WebGL. Games, interactive art, performant canvases.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://github.com/regl-project/regl">regl</a></span><span class="lib-desc">Functional WebGL. Low-level, fast. Good for custom shader-based viz.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://deck.gl/">deck.gl</a></span><span class="lib-desc">Uber&rsquo;s large-dataset WebGL viz. Layers for points, arcs, hexagons, tiles. GPU aggregation.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://luma.gl/">luma.gl</a></span><span class="lib-desc">The lower-level core behind deck.gl. Go here if deck&rsquo;s layers aren&rsquo;t what you need.</span></div>
+    </div>
+
+    <h3>Layout / flow / canvas</h3>
+    <div class="lib-list">
+      <div class="lib"><span class="lib-name"><a href="https://tldraw.dev/">tldraw</a></span><span class="lib-desc">Drop-in canvas with custom-shape API. If you want an infinite whiteboard, start here.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://reactflow.dev/">React Flow (xyflow)</a></span><span class="lib-desc">Drag-and-drop node editor. n8n, Flowise, many LLM tools ship on this.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://github.com/excalidraw/excalidraw">Excalidraw</a></span><span class="lib-desc">Hand-drawn whiteboard library. Embed or fork.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://konvajs.org/">Konva</a></span><span class="lib-desc">Object-model 2D canvas. When you want shapes and events without a canvas engine.</span></div>
+    </div>
+
+    <h3>Animation</h3>
+    <div class="lib-list">
+      <div class="lib"><span class="lib-name"><a href="https://motion.dev/">Motion (Framer Motion)</a></span><span class="lib-desc">React declarative animation. <code>layoutId</code>, scroll-linked values, gestures. Your go-to for level transitions.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://gsap.com/">GSAP</a></span><span class="lib-desc">Industrial-grade timeline animation. ScrollTrigger is the scrollytelling workhorse.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://lottiefiles.com/">Lottie</a></span><span class="lib-desc">After-Effects → JSON animations. Play on the web. Massive free library.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://animejs.com/">anime.js</a></span><span class="lib-desc">Small, pure-JS animation lib. No framework required.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://github.com/darkroomengineering/lenis">Lenis</a></span><span class="lib-desc">Smooth-scroll on top of native. Pair with ScrollTrigger or Motion.</span></div>
+    </div>
+
+    <h3>State &amp; reactivity</h3>
+    <div class="lib-list">
+      <div class="lib"><span class="lib-name"><a href="https://zustand.docs.pmnd.rs/">Zustand</a></span><span class="lib-desc">Tiny state store for React. The no-ceremony Redux replacement.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://jotai.org/">Jotai</a></span><span class="lib-desc">Atom-based React state. Great for complex derived state.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://www.solidjs.com/">Solid signals</a></span><span class="lib-desc">Fine-grained reactive primitives. The future of JS reactivity.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://mobx.js.org/">MobX</a></span><span class="lib-desc">Observable state. Older, still useful when derivations are deep.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://yjs.dev/">Yjs</a></span><span class="lib-desc">CRDT for collaborative editing. The sync layer behind tldraw, JupyterLab, many editors.</span></div>
+    </div>
+
+    <h3>Data &amp; storage</h3>
+    <div class="lib-list">
+      <div class="lib"><span class="lib-name"><a href="https://duckdb.org/">DuckDB</a></span><span class="lib-desc">Embedded analytical SQL DB. duckdb-wasm runs in the browser. Query Parquet directly.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://turso.tech/">Turso</a></span><span class="lib-desc">SQLite on the edge. libSQL under the hood. Great for small deployed apps.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://supabase.com/">Supabase</a></span><span class="lib-desc">Postgres + auth + realtime + storage. The full-stack starter for most SaaS-shape apps.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://neo4j.com/">Neo4j</a></span><span class="lib-desc">Graph DB + Cypher. Commercial, but a free community edition.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://kuzudb.com/">Kùzu</a></span><span class="lib-desc">Embedded graph DB &mdash; SQLite for graphs.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://weaviate.io/">Weaviate</a></span><span class="lib-desc">Vector DB with hybrid search + RAG. Open-source.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://www.trychroma.com/">Chroma</a></span><span class="lib-desc">Embeddable vector DB. Very low-ceremony for prototypes.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://www.sqlite.org/">SQLite + sqlite-vec</a></span><span class="lib-desc">SQLite with a vector-search extension. Zero-ops local-first ML DB.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://qdrant.tech/">Qdrant</a></span><span class="lib-desc">Rust-built vector DB. Fast, accurate, cloud or self-host.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://lancedb.com/">LanceDB</a></span><span class="lib-desc">Serverless embedded vector DB. Columnar Arrow storage.</span></div>
+    </div>
+
+    <h3>ML / LLMs / embeddings</h3>
+    <div class="lib-list">
+      <div class="lib"><span class="lib-name"><a href="https://docs.anthropic.com/">Anthropic API (Claude)</a></span><span class="lib-desc">Long context, strong reasoning, tool use. Your primary LLM for summarization, extraction, question answering.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://docs.voyageai.com/">Voyage v3</a></span><span class="lib-desc">Anthropic-recommended embeddings. Strong retrieval performance.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://platform.openai.com/">OpenAI API</a></span><span class="lib-desc">text-embedding-3-* and gpt-*. Cheap embedding default.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://huggingface.co/">Hugging Face</a></span><span class="lib-desc">The open model hub. sentence-transformers, BERTopic, most open embedders.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://umap-learn.readthedocs.io/">UMAP (Python)</a></span><span class="lib-desc">Leland McInnes&rsquo; dimensionality-reduction lib.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://hdbscan.readthedocs.io/">HDBSCAN (Python)</a></span><span class="lib-desc">Density-based hierarchical clustering. Pair with UMAP.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://github.com/MaartenGr/BERTopic">BERTopic</a></span><span class="lib-desc">End-to-end topic modeling: embed → UMAP → HDBSCAN → c-TF-IDF. Great for the &ldquo;label the clusters&rdquo; step.</span></div>
+      <div class="lib"><span class="lib-name"><a href="https://scikit-learn.org/">scikit-learn</a></span><span class="lib-desc">Classical ML. PCA, k-means, many clustering baselines.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     13 · CONCEPTS & PRINCIPLES
+     ========================================================= -->
+<section id="principles">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">13 · Concepts &amp; Principles</span>
+      <h2>The <em>ideas</em> behind every decision</h2>
+      <p class="section-lede">
+        A glossary of the theoretical pieces that come up when you design one of these tools. Each has a one-line
+        definition, the person or paper it&rsquo;s from, and where it applies in your build.
+      </p>
+    </div>
+
+    <div class="lib-list">
+      <div class="lib">
+        <span class="lib-name">Shneiderman&rsquo;s Mantra</span>
+        <span class="lib-desc">
+          &ldquo;Overview first, zoom and filter, then details-on-demand.&rdquo;
+          Ben Shneiderman, 1996, <a href="https://www.cs.umd.edu/~ben/papers/Shneiderman1996eyes.pdf">The Eyes Have It</a>.
+          Applies directly to the four-level zoom structure &mdash; you&rsquo;re literally building an instance of it.
+        </span>
+      </div>
+      <div class="lib">
+        <span class="lib-name">Degree of Interest (DOI)</span>
+        <span class="lib-desc">
+          Furnas, 1986. <em>DOI = Intrinsic Importance &minus; Distance from Focus</em>. Answers &ldquo;which
+          items deserve display at this altitude?&rdquo; Use to decide what collapses into a cluster vs.
+          stays visible.
+        </span>
+      </div>
+      <div class="lib">
+        <span class="lib-name">Focus + Context</span>
+        <span class="lib-desc">
+          Show the detail the user needs without losing the whole. Fisheye views, semantic zoom, and
+          context-preserving navigation are all in this family.
+        </span>
+      </div>
+      <div class="lib">
+        <span class="lib-name">Semantic Zoom</span>
+        <span class="lib-desc">
+          From Pad++/Zoomable UIs research, Perlin &amp; Fox. Objects don&rsquo;t just scale &mdash; they
+          swap representation at scale thresholds. Your cluster &rarr; papers transition is this.
+        </span>
+      </div>
+      <div class="lib">
+        <span class="lib-name">Segel &amp; Heer&rsquo;s Narrative Visualization Taxonomy</span>
+        <span class="lib-desc">
+          Martini Glass · Interactive Slideshow · Drill-Down Story. The canonical frame for where
+          author control vs. reader control sit.
+        </span>
+      </div>
+      <div class="lib">
+        <span class="lib-name">Explanatory vs. Exploratory</span>
+        <span class="lib-desc">
+          Cole Knaflic&rsquo;s distinction. Explanatory = you know the story, present it. Exploratory =
+          the reader finds the story. Most research tools are exploratory with explanatory scaffolding.
+        </span>
+      </div>
+      <div class="lib">
+        <span class="lib-name">&ldquo;Show and Tell&rdquo;</span>
+        <span class="lib-desc">
+          Alberto Cairo. Good visualizations always pair visualization with annotation. Both modes &mdash;
+          data and caption &mdash; carry meaning.
+        </span>
+      </div>
+      <div class="lib">
+        <span class="lib-name">Data Humanism</span>
+        <span class="lib-desc">
+          Giorgia Lupi, 2017 manifesto. A reaction against cold, anonymous charting. Invite imperfection,
+          context, handwriting, emotion. Relevant because your research is <em>yours</em> &mdash; a
+          humanist design register may beat a clinical one.
+        </span>
+      </div>
+      <div class="lib">
+        <span class="lib-name">Tufte&rsquo;s Data-Ink Ratio</span>
+        <span class="lib-desc">
+          Maximize ink that encodes data; minimize everything else. A good check when your canvas gets
+          cluttered with chrome.
+        </span>
+      </div>
+      <div class="lib">
+        <span class="lib-name">Gestalt Grouping Principles</span>
+        <span class="lib-desc">
+          Proximity, similarity, continuity, closure, common fate. Why clusters in your map feel like
+          &ldquo;a thing&rdquo; when rendered well.
+        </span>
+      </div>
+      <div class="lib">
+        <span class="lib-name">Progressive Disclosure</span>
+        <span class="lib-desc">
+          UX principle from Don Norman et al. Reveal complexity only when the user reaches for it. The
+          universe &rarr; cluster &rarr; canvas &rarr; detail path is progressive disclosure writ huge.
+        </span>
+      </div>
+      <div class="lib">
+        <span class="lib-name">Reactive Document</span>
+        <span class="lib-desc">
+          Bret Victor, 2011. A document whose outputs are functions of its inputs, where inputs are
+          reader-manipulable. The substrate of explorables.
+        </span>
+      </div>
+      <div class="lib">
+        <span class="lib-name">Explorable Explanation</span>
+        <span class="lib-desc">
+          Bret Victor, 2011. Composed of reactive documents, explorable examples, and contextual
+          information. The whole genre&rsquo;s name.
+        </span>
+      </div>
+      <div class="lib">
+        <span class="lib-name">&ldquo;Kill Math&rdquo; &amp; its critique</span>
+        <span class="lib-desc">
+          Victor&rsquo;s claim that symbolic math fails human cognition; Evan Miller&rsquo;s pushback that
+          notation has irreplaceable power. The core tension every explorable designer wrestles with.
+        </span>
+      </div>
+      <div class="lib">
+        <span class="lib-name">The Zoomable User Interface (ZUI)</span>
+        <span class="lib-desc">
+          Perlin &amp; Fox, Pad, 1993. The academic antecedent to Google Maps, Prezi, Figma, and the
+          interface you&rsquo;re building.
+        </span>
+      </div>
+      <div class="lib">
+        <span class="lib-name">Small Multiples</span>
+        <span class="lib-desc">
+          Tufte. Many small charts sharing the same axes. Good mode for comparing clusters or slices
+          of your corpus at a glance.
+        </span>
+      </div>
+      <div class="lib">
+        <span class="lib-name">Constructive Visualization</span>
+        <span class="lib-desc">
+          Huron, Carpendale et al. Visualization-as-activity, where building the view is itself the
+          learning. Close to what you want at the canvas level.
+        </span>
+      </div>
+      <div class="lib">
+        <span class="lib-name">Distant Reading</span>
+        <span class="lib-desc">
+          Franco Moretti. Reading a corpus at a scale no individual can read. The intellectual case for
+          embedding maps as scholarly objects.
+        </span>
+      </div>
+      <div class="lib">
+        <span class="lib-name">FLIP animation</span>
+        <span class="lib-desc">
+          First-Last-Invert-Play, Paul Lewis. Record before/after bounding boxes, invert the difference,
+          interpolate. How level transitions are made to feel continuous.
+        </span>
+      </div>
+      <div class="lib">
+        <span class="lib-name">Shared Element Transition</span>
+        <span class="lib-desc">
+          iOS / Android pattern. An element from view A morphs into the corresponding element in view B.
+          In web, Framer Motion <code>layoutId</code> + the View Transitions API.
+        </span>
+      </div>
+    </div>
+
+    <div class="callout cyan">
+      <div class="callout-title">The one rule worth memorizing</div>
+      <p>
+        At every zoom level of your tool, ask: &ldquo;What is the minimum that makes this level legible on its
+        own, <em>and</em> what lives at another level that this level should gesture toward?&rdquo; Get both
+        answers right and the whole stack feels inevitable.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     14 · YOUR BUILD — twelve paths
+     ========================================================= -->
+<section id="build">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">14 · Your Build</span>
+      <h2>Twelve ways to actually <em>make</em> the thing</h2>
+      <p class="section-lede">
+        Everything above was research. This section is construction. Twelve distinct paths to the four-level
+        zoom tool, each a coherent stack with its own philosophy. Each option names the tradeoff it&rsquo;s
+        making &mdash; you&rsquo;re picking which problem you&rsquo;d rather solve, not which is &ldquo;best.&rdquo;
+      </p>
+    </div>
+
+    <p>
+      Before the options, the shared backbone. Almost every path below assumes roughly the same data pipeline:
+    </p>
+
+    <div class="callout">
+      <div class="callout-title">The shared backend pattern</div>
+      <p>
+        <strong>Ingest</strong> (PDFs via GROBID or Docling, Zotero via API, manual notes, OpenAlex for external
+        papers) →
+        <strong>Normalize</strong> (unified schema: <code>item</code> with <code>type</code>, <code>title</code>,
+        <code>text</code>, <code>source</code>, <code>tags</code>) →
+        <strong>Embed</strong> (Voyage or OpenAI or local sentence-transformers) →
+        <strong>Reduce</strong> (UMAP to 10D then 2D) →
+        <strong>Cluster</strong> (HDBSCAN on the 10D) →
+        <strong>Label</strong> (c-TF-IDF or Claude on the cluster contents) →
+        <strong>Store</strong> (SQLite + sqlite-vec, or DuckDB, or Postgres + pgvector) →
+        <strong>Serve</strong> (a small JSON/Arrow API the front-end consumes).
+      </p>
+      <p>
+        This pipeline is identical across the options below. What changes is <em>what you wrap it in</em>.
+      </p>
+    </div>
+
+    <!-- OPTION 1 -->
+    <div class="build-option">
+      <div class="build-header">
+        <span class="build-num">Option 01</span>
+        <h3>Observable Framework + Deepscatter</h3>
+        <span class="build-diff easy">Easy</span>
+      </div>
+      <p class="build-tagline">The &ldquo;you already know the pipeline&rdquo; path. Embrace it.</p>
+      <div class="build-stack">
+        <span class="stack-chip">Observable Framework</span>
+        <span class="stack-chip">Deepscatter</span>
+        <span class="stack-chip">DuckDB-WASM</span>
+        <span class="stack-chip">Python dataloaders</span>
+        <span class="stack-chip">Markdown pages</span>
+      </div>
+      <div class="build-grid">
+        <div class="build-section">
+          <h4>What it looks like</h4>
+          <p>
+            A static site. Your universe view is a Deepscatter canvas reading a Parquet file of embeddings.
+            Cluster labels come from a companion JSON. Each card&rsquo;s detail page is a Markdown file
+            with reactive cells that read from DuckDB-WASM. Canvas mode is a <code>tldraw</code> iframe
+            embedded in a Markdown page.
+          </p>
+        </div>
+        <div class="build-section">
+          <h4>Why pick it</h4>
+          <p>
+            Dataloaders in any language mean your Python pipeline is a first-class citizen. Zero server.
+            Deploys to Vercel/Netlify. The explorable-explanations community&rsquo;s own framework, so it
+            <em>thinks</em> in the idioms of this site.
+          </p>
+        </div>
+        <div class="build-section">
+          <h4>Where it hurts</h4>
+          <p>
+            Not built for full-app UIs. Level-3 canvas editing is awkward unless you embed something else.
+            Routing / state across pages is minimal.
+          </p>
+        </div>
+        <div class="build-section">
+          <h4>Pick this if</h4>
+          <p>You want to ship something in a week and mostly write in Markdown. Add interactive surfaces later.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- OPTION 2 -->
+    <div class="build-option">
+      <div class="build-header">
+        <span class="build-num">Option 02</span>
+        <h3>Next.js + Cosmograph + tldraw</h3>
+        <span class="build-diff medium">Medium</span>
+      </div>
+      <p class="build-tagline">The &ldquo;full product&rdquo; path. The one most likely to turn into a real app.</p>
+      <div class="build-stack">
+        <span class="stack-chip">Next.js (App Router)</span>
+        <span class="stack-chip">Cosmograph</span>
+        <span class="stack-chip">tldraw SDK</span>
+        <span class="stack-chip">Supabase</span>
+        <span class="stack-chip">Framer Motion</span>
+        <span class="stack-chip">Claude API</span>
+      </div>
+      <div class="build-grid">
+        <div class="build-section">
+          <h4>What it looks like</h4>
+          <p>
+            Auth via Supabase. Level 1 is a Cosmograph canvas reading from pgvector. Level 2 is the same
+            Cosmograph zoomed, with cluster-labels fetched at higher LOD. Level 3 swaps to a tldraw canvas
+            keyed by cluster ID. Level 4 is a Next.js route with MDX content. <code>layoutId</code>
+            transitions between levels.
+          </p>
+        </div>
+        <div class="build-section">
+          <h4>Why pick it</h4>
+          <p>
+            Every piece is actively maintained and mainstream. Deploys to Vercel with one button. Full
+            backend via Supabase (auth, postgres, storage). Cosmograph&rsquo;s GPU sim scales to your
+            entire future library.
+          </p>
+        </div>
+        <div class="build-section">
+          <h4>Where it hurts</h4>
+          <p>
+            Most code. You&rsquo;re writing a real app. Theme consistency across Cosmograph + tldraw + your
+            own pages takes work. Cosmograph&rsquo;s license is MIT with some paid tiers for advanced features.
+          </p>
+        </div>
+        <div class="build-section">
+          <h4>Pick this if</h4>
+          <p>You want something you could eventually share with other researchers, and you&rsquo;re willing to spend a few months.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- OPTION 3 -->
+    <div class="build-option">
+      <div class="build-header">
+        <span class="build-num">Option 03</span>
+        <h3>SvelteKit + Sigma.js + Pudding-style scrolly</h3>
+        <span class="build-diff medium">Medium</span>
+      </div>
+      <p class="build-tagline">The &ldquo;make every detail page a Pudding essay&rdquo; path.</p>
+      <div class="build-stack">
+        <span class="stack-chip">SvelteKit</span>
+        <span class="stack-chip">Sigma.js + Graphology</span>
+        <span class="stack-chip">Scrollama</span>
+        <span class="stack-chip">D3</span>
+        <span class="stack-chip">Turso (libSQL)</span>
+      </div>
+      <div class="build-grid">
+        <div class="build-section">
+          <h4>What it looks like</h4>
+          <p>
+            Universe and cluster views are Sigma + Graphology with Leiden clustering. Canvas is a
+            Svelte-built grid-with-arrows. Detail pages use Scrollama to reveal the research story
+            Pudding-style &mdash; sticky graphic, stepped annotations.
+          </p>
+        </div>
+        <div class="build-section">
+          <h4>Why pick it</h4>
+          <p>
+            Svelte&rsquo;s reactivity is tailor-made for reactive documents. Tiny bundles. The stack the
+            Pudding already uses, so you&rsquo;re mirroring the best visual-essay studio.
+          </p>
+        </div>
+        <div class="build-section">
+          <h4>Where it hurts</h4>
+          <p>
+            Smaller ecosystem than React. Fewer ready-made components for canvas editing. You&rsquo;ll
+            either build the canvas in Svelte or embed something non-native.
+          </p>
+        </div>
+        <div class="build-section">
+          <h4>Pick this if</h4>
+          <p>The scrolly-essay detail pages matter most to you &mdash; the universe is nice but the stories it contains are the point.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- OPTION 4 -->
+    <div class="build-option">
+      <div class="build-header">
+        <span class="build-num">Option 04</span>
+        <h3>Astro + MDX + Islands</h3>
+        <span class="build-diff easy">Easy</span>
+      </div>
+      <p class="build-tagline">The &ldquo;mostly a book, with widgets&rdquo; path.</p>
+      <div class="build-stack">
+        <span class="stack-chip">Astro</span>
+        <span class="stack-chip">MDX</span>
+        <span class="stack-chip">React / Svelte islands</span>
+        <span class="stack-chip">Static JSON</span>
+        <span class="stack-chip">D3</span>
+      </div>
+      <div class="build-grid">
+        <div class="build-section">
+          <h4>What it looks like</h4>
+          <p>
+            The whole site is Markdown/MDX. The universe and cluster views are React (or Svelte)
+            &ldquo;islands&rdquo; that Astro hydrates selectively. Canvas is a tldraw iframe. Detail
+            pages are MDX files rendered at build time.
+          </p>
+        </div>
+        <div class="build-section">
+          <h4>Why pick it</h4>
+          <p>
+            Blistering fast. Almost no JS ships unless a visitor opens a widget. Great DX. Deploys
+            anywhere &mdash; Vercel, Netlify, GitHub Pages, Cloudflare Pages.
+          </p>
+        </div>
+        <div class="build-section">
+          <h4>Where it hurts</h4>
+          <p>
+            Adding/editing items means rebuilding the site. Not great once your corpus changes hourly.
+            Full app UX (auth, real-time collab) is out of reach without adding services.
+          </p>
+        </div>
+        <div class="build-section">
+          <h4>Pick this if</h4>
+          <p>You edit in bulk, deploy occasionally, and mostly want the site to be a finished document.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- OPTION 5 -->
+    <div class="build-option">
+      <div class="build-header">
+        <span class="build-num">Option 05</span>
+        <h3>Three.js / R3F 3D Universe</h3>
+        <span class="build-diff hard">Hard</span>
+      </div>
+      <p class="build-tagline">The &ldquo;lean into the cosmic metaphor&rdquo; path.</p>
+      <div class="build-stack">
+        <span class="stack-chip">react-three-fiber</span>
+        <span class="stack-chip">Drei</span>
+        <span class="stack-chip">Three.js postprocessing</span>
+        <span class="stack-chip">Next.js</span>
+        <span class="stack-chip">Framer Motion 3D</span>
+      </div>
+      <div class="build-grid">
+        <div class="build-section">
+          <h4>What it looks like</h4>
+          <p>
+            Level 1 is a literal 3D starfield &mdash; your embeddings rendered as stars in 3D space with a
+            fly-through camera. Cluster is a zoom-in to a local region with star labels. Canvas is either a
+            2D HTML overlay or a flat plane in the scene. Detail is a full-screen HTML card.
+          </p>
+        </div>
+        <div class="build-section">
+          <h4>Why pick it</h4>
+          <p>
+            Incredibly evocative. Closest in feel to &ldquo;100,000 Stars,&rdquo; &ldquo;Size of Space,&rdquo;
+            and the neal.fun aesthetic you cited. Potentially unforgettable as a landing experience.
+          </p>
+        </div>
+        <div class="build-section">
+          <h4>Where it hurts</h4>
+          <p>
+            Hardest of the twelve. 3D labels, depth-aware interaction, text legibility in 3D, mobile
+            performance &mdash; every one of these is a multi-week problem. Accessibility is tough.
+          </p>
+        </div>
+        <div class="build-section">
+          <h4>Pick this if</h4>
+          <p>The <em>feeling</em> matters as much as the function &mdash; and you&rsquo;re willing to invest in graphics engineering.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- OPTION 6 -->
+    <div class="build-option">
+      <div class="build-header">
+        <span class="build-num">Option 06</span>
+        <h3>deck.gl + MapLibre + your own tile pyramid</h3>
+        <span class="build-diff hard">Hard</span>
+      </div>
+      <p class="build-tagline">The &ldquo;my knowledge is Google Maps&rdquo; path.</p>
+      <div class="build-stack">
+        <span class="stack-chip">deck.gl</span>
+        <span class="stack-chip">MapLibre GL</span>
+        <span class="stack-chip">Supercluster</span>
+        <span class="stack-chip">tippecanoe</span>
+        <span class="stack-chip">Next.js</span>
+      </div>
+      <div class="build-grid">
+        <div class="build-section">
+          <h4>What it looks like</h4>
+          <p>
+            Treat your embedding UMAP as a coordinate system. Pre-render vector tiles (via tippecanoe)
+            at zoom levels 0&ndash;14. Serve them as MVT. MapLibre renders them. deck.gl layers add the
+            rich interactivity (hover cards, selection). Canvas lives inside a &ldquo;building interior&rdquo;
+            layer that appears at max zoom.
+          </p>
+        </div>
+        <div class="build-section">
+          <h4>Why pick it</h4>
+          <p>
+            Infinitely scalable rendering. Anyone who has ever used Google Maps knows the UX. Beautiful
+            out of the box. The deck.gl + Mapbox pattern is battle-tested at Uber scale.
+          </p>
+        </div>
+        <div class="build-section">
+          <h4>Where it hurts</h4>
+          <p>
+            Building tile pyramids is its own craft. Vector-tile styling is steep. Updating your corpus
+            means regenerating tiles. For &lt;100K items, this is overkill.
+          </p>
+        </div>
+        <div class="build-section">
+          <h4>Pick this if</h4>
+          <p>You&rsquo;re thinking about a 1M+ item corpus (e.g. integrating OpenAlex), and you want no rendering ceiling ever.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- OPTION 7 -->
+    <div class="build-option">
+      <div class="build-header">
+        <span class="build-num">Option 07</span>
+        <h3>Obsidian vault + custom web viewer</h3>
+        <span class="build-diff easy">Easy</span>
+      </div>
+      <p class="build-tagline">The &ldquo;editing is already solved, just add the map&rdquo; path.</p>
+      <div class="build-stack">
+        <span class="stack-chip">Obsidian</span>
+        <span class="stack-chip">Markdown files</span>
+        <span class="stack-chip">Dataview</span>
+        <span class="stack-chip">Quartz or Obsidian Publish</span>
+        <span class="stack-chip">A small embedding script</span>
+      </div>
+      <div class="build-grid">
+        <div class="build-section">
+          <h4>What it looks like</h4>
+          <p>
+            You write and edit everything in Obsidian. A Node/Python script embeds each note, clusters,
+            regenerates labels. Quartz (open-source) publishes your vault as a static site, which you
+            extend with a universe page that renders the clusters. Graph view is Obsidian&rsquo;s native
+            graph + an embedding map you add.
+          </p>
+        </div>
+        <div class="build-section">
+          <h4>Why pick it</h4>
+          <p>
+            You inherit a polished editor and a whole plugin ecosystem. Your data is just Markdown on
+            disk. Zero vendor lock-in.
+          </p>
+        </div>
+        <div class="build-section">
+          <h4>Where it hurts</h4>
+          <p>
+            The web viewer has to re-implement several Obsidian behaviors (wikilinks, embeds, block
+            refs). Obsidian&rsquo;s aesthetic and your custom views won&rsquo;t be in sync.
+          </p>
+        </div>
+        <div class="build-section">
+          <h4>Pick this if</h4>
+          <p>You already have (or want) an Obsidian vault and mostly want to share/visualize it online.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- OPTION 8 -->
+    <div class="build-option">
+      <div class="build-header">
+        <span class="build-num">Option 08</span>
+        <h3>Tauri desktop app, local-first</h3>
+        <span class="build-diff medium">Medium</span>
+      </div>
+      <p class="build-tagline">The &ldquo;no server, no subscription, offline forever&rdquo; path.</p>
+      <div class="build-stack">
+        <span class="stack-chip">Tauri (Rust)</span>
+        <span class="stack-chip">React or Svelte front-end</span>
+        <span class="stack-chip">SQLite + sqlite-vec</span>
+        <span class="stack-chip">Local embedding model</span>
+        <span class="stack-chip">Ollama or llama.cpp for LLM</span>
+      </div>
+      <div class="build-grid">
+        <div class="build-section">
+          <h4>What it looks like</h4>
+          <p>
+            A native desktop app that runs entirely on your machine. Your corpus lives in a SQLite file.
+            Embeddings run via sentence-transformers (CPU) or Ollama (GPU). Same React/Svelte UI as
+            Option 2, just packaged natively.
+          </p>
+        </div>
+        <div class="build-section">
+          <h4>Why pick it</h4>
+          <p>
+            Privacy by default. No per-token LLM bills. Your data never leaves your laptop. Deploys
+            as a signed <code>.app</code> / <code>.msi</code> / <code>.deb</code>. Tauri bundles are
+            ~10MB, Electron ~100MB.
+          </p>
+        </div>
+        <div class="build-section">
+          <h4>Where it hurts</h4>
+          <p>
+            &ldquo;Deployed online&rdquo; was one of your explicit requirements &mdash; this isn&rsquo;t
+            that. Unless you add an optional sync layer, it&rsquo;s personal-only. Building + signing
+            for each OS is a chore.
+          </p>
+        </div>
+        <div class="build-section">
+          <h4>Pick this if</h4>
+          <p>Privacy and cost dominate, and you&rsquo;d rather ship a desktop app than maintain a web service.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- OPTION 9 -->
+    <div class="build-option">
+      <div class="build-header">
+        <span class="build-num">Option 09</span>
+        <h3>Pure static site + Git-as-database</h3>
+        <span class="build-diff easy">Easy</span>
+      </div>
+      <p class="build-tagline">The &ldquo;nothing to break&rdquo; path.</p>
+      <div class="build-stack">
+        <span class="stack-chip">Astro or 11ty</span>
+        <span class="stack-chip">Markdown in Git</span>
+        <span class="stack-chip">Precomputed JSON/Parquet</span>
+        <span class="stack-chip">GitHub Actions</span>
+        <span class="stack-chip">Deck.gl or Sigma</span>
+      </div>
+      <div class="build-grid">
+        <div class="build-section">
+          <h4>What it looks like</h4>
+          <p>
+            Every item is a Markdown file in a Git repo. A GitHub Action re-embeds, re-clusters, and
+            publishes <code>items.parquet</code> + <code>clusters.json</code> whenever you push. The
+            site reads those and renders. Editing = git commit.
+          </p>
+        </div>
+        <div class="build-section">
+          <h4>Why pick it</h4>
+          <p>
+            Zero running infrastructure. Everything version-controlled. A researcher can understand the
+            stack in a weekend. Forkable.
+          </p>
+        </div>
+        <div class="build-section">
+          <h4>Where it hurts</h4>
+          <p>
+            Editing inside the site is hard to add. Git isn&rsquo;t a real-time DB, so interactions that
+            modify state round-trip through commits.
+          </p>
+        </div>
+        <div class="build-section">
+          <h4>Pick this if</h4>
+          <p>You&rsquo;re comfortable with git as a writer&rsquo;s medium and you&rsquo;re optimizing for simplicity.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- OPTION 10 -->
+    <div class="build-option">
+      <div class="build-header">
+        <span class="build-num">Option 10</span>
+        <h3>Claude-native, LLM-first pipeline</h3>
+        <span class="build-diff medium">Medium</span>
+      </div>
+      <p class="build-tagline">The &ldquo;the model does the organizing, not an algorithm&rdquo; path.</p>
+      <div class="build-stack">
+        <span class="stack-chip">Claude API</span>
+        <span class="stack-chip">Voyage embeddings</span>
+        <span class="stack-chip">Next.js</span>
+        <span class="stack-chip">Cosmograph</span>
+        <span class="stack-chip">Structured JSON output</span>
+      </div>
+      <div class="build-grid">
+        <div class="build-section">
+          <h4>What it looks like</h4>
+          <p>
+            Instead of HDBSCAN + c-TF-IDF, Claude proposes the cluster structure by reading the
+            embedding neighborhoods. Claude names every cluster. Claude writes the &ldquo;why these
+            belong together&rdquo; caption. Canvas auto-arranges itself via Claude&rsquo;s suggested
+            layout. You stay the final editor.
+          </p>
+        </div>
+        <div class="build-section">
+          <h4>Why pick it</h4>
+          <p>
+            The labels become <em>meaningful</em>, not bag-of-words. The clustering respects semantics
+            algorithms miss. When your corpus grows to include very different genres (papers + talks +
+            notes), the model handles heterogeneity that statistics trip on.
+          </p>
+        </div>
+        <div class="build-section">
+          <h4>Where it hurts</h4>
+          <p>
+            LLM bills. Non-determinism &mdash; the map shuffles unless you pin it. You have to design
+            prompt and caching carefully.
+          </p>
+        </div>
+        <div class="build-section">
+          <h4>Pick this if</h4>
+          <p>Your corpus is heterogeneous and the quality of labels / groupings matters more than cost or speed.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- OPTION 11 -->
+    <div class="build-option">
+      <div class="build-header">
+        <span class="build-num">Option 11</span>
+        <h3>No-code stitched stack</h3>
+        <span class="build-diff easy">Easy</span>
+      </div>
+      <p class="build-tagline">The &ldquo;ship in a weekend with existing tools&rdquo; path.</p>
+      <div class="build-stack">
+        <span class="stack-chip">Notion (editing)</span>
+        <span class="stack-chip">Kumu (graph)</span>
+        <span class="stack-chip">Heptabase (canvas)</span>
+        <span class="stack-chip">Super.so or Fathom (publishing)</span>
+      </div>
+      <div class="build-grid">
+        <div class="build-section">
+          <h4>What it looks like</h4>
+          <p>
+            Editing happens in Notion. Graph view lives in Kumu, imported from a Notion export. Canvas
+            is Heptabase (deep-linkable). You stitch them under one subdomain via Super.so.
+          </p>
+        </div>
+        <div class="build-section">
+          <h4>Why pick it</h4>
+          <p>
+            You ship today. Every tool is polished and professionally maintained. Good for testing
+            whether the <em>concept</em> works before investing in code.
+          </p>
+        </div>
+        <div class="build-section">
+          <h4>Where it hurts</h4>
+          <p>
+            Not unified. Different fonts, different keyboard shortcuts, different models. No semantic
+            zoom at all. The embedding universe just isn&rsquo;t in any of these tools.
+          </p>
+        </div>
+        <div class="build-section">
+          <h4>Pick this if</h4>
+          <p>You want to learn what you&rsquo;d actually use before building anything custom.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- OPTION 12 -->
+    <div class="build-option">
+      <div class="build-header">
+        <span class="build-num">Option 12</span>
+        <h3>Python FastAPI + React (classic research stack)</h3>
+        <span class="build-diff medium">Medium</span>
+      </div>
+      <p class="build-tagline">The &ldquo;a research engineer would build this&rdquo; path.</p>
+      <div class="build-stack">
+        <span class="stack-chip">FastAPI</span>
+        <span class="stack-chip">Postgres + pgvector</span>
+        <span class="stack-chip">UMAP/HDBSCAN/BERTopic</span>
+        <span class="stack-chip">React + D3</span>
+        <span class="stack-chip">Docker</span>
+      </div>
+      <div class="build-grid">
+        <div class="build-section">
+          <h4>What it looks like</h4>
+          <p>
+            A proper backend service. FastAPI serves your embedding/cluster/label endpoints. pgvector
+            handles similarity search. React front-end is your usual Next or Vite setup. Background
+            jobs re-embed on change.
+          </p>
+        </div>
+        <div class="build-section">
+          <h4>Why pick it</h4>
+          <p>
+            Python ML + Python ingestion + a real API. Everyone in your field can read this code.
+            BERTopic and other PyData libraries plug in natively.
+          </p>
+        </div>
+        <div class="build-section">
+          <h4>Where it hurts</h4>
+          <p>
+            You&rsquo;re running a service. Docker, Postgres, auth, CORS, CI. The &ldquo;deployed&rdquo;
+            requirement becomes &ldquo;operated.&rdquo; Fly.io, Railway, or Render soften this.
+          </p>
+        </div>
+        <div class="build-section">
+          <h4>Pick this if</h4>
+          <p>You&rsquo;re already a Python researcher and prefer the tools you know &mdash; or you want this to be readable by your lab.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>The honest comparison</h3>
+    <table>
+      <thead>
+        <tr><th>Option</th><th>Time to MVP</th><th>Scalability</th><th>Aesthetic ceiling</th><th>Deployable?</th><th>Best for</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>01 · Observable Framework</td><td>1 week</td><td>Medium</td><td>High</td><td>Yes (static)</td><td>Data-first writer</td></tr>
+        <tr><td>02 · Next.js + Cosmograph + tldraw</td><td>2&ndash;3 months</td><td>High</td><td>High</td><td>Yes</td><td>A real product</td></tr>
+        <tr><td>03 · SvelteKit + Sigma</td><td>1&ndash;2 months</td><td>Medium</td><td>High</td><td>Yes</td><td>Essayist</td></tr>
+        <tr><td>04 · Astro + MDX</td><td>1&ndash;2 weeks</td><td>Low-med</td><td>High</td><td>Yes (static)</td><td>Book-like sites</td></tr>
+        <tr><td>05 · Three.js / R3F</td><td>3&ndash;6 months</td><td>High</td><td>Highest</td><td>Yes</td><td>Aesthetic-forward</td></tr>
+        <tr><td>06 · deck.gl + tiles</td><td>2&ndash;3 months</td><td>Highest</td><td>High</td><td>Yes</td><td>Huge corpus</td></tr>
+        <tr><td>07 · Obsidian + Quartz</td><td>1&ndash;2 weeks</td><td>Medium</td><td>Medium</td><td>Yes (static)</td><td>Vault-first</td></tr>
+        <tr><td>08 · Tauri desktop</td><td>1&ndash;2 months</td><td>High</td><td>High</td><td>No (native)</td><td>Local-first</td></tr>
+        <tr><td>09 · Static + Git</td><td>1 week</td><td>Medium</td><td>Medium</td><td>Yes (static)</td><td>Minimalist</td></tr>
+        <tr><td>10 · LLM-first</td><td>1&ndash;2 months</td><td>Medium</td><td>High</td><td>Yes</td><td>Heterogeneous corpus</td></tr>
+        <tr><td>11 · No-code stitched</td><td>1 weekend</td><td>Low</td><td>Low</td><td>Yes (SaaS)</td><td>Concept testing</td></tr>
+        <tr><td>12 · FastAPI + React</td><td>1&ndash;2 months</td><td>High</td><td>High</td><td>Yes</td><td>Python-native</td></tr>
+      </tbody>
+    </table>
+
+    <h3>A recommended path</h3>
+    <div class="callout magenta">
+      <div class="callout-title">If you forced me to pick one, here&rsquo;s the sequence</div>
+      <p>
+        <strong>Week 0:</strong> Build Option 11 (no-code stitched) for one afternoon &mdash; just to feel
+        what each level should do. Don&rsquo;t keep it.
+      </p>
+      <p>
+        <strong>Weeks 1&ndash;2:</strong> Build Option 01 (Observable Framework + Deepscatter). Get your
+        real corpus flowing through the real pipeline. Ship it as a personal reference site.
+      </p>
+      <p>
+        <strong>Months 1&ndash;3:</strong> If you love using the Observable version, migrate to Option 02
+        (Next.js + Cosmograph + tldraw). Most of your Python pipeline carries over; the front-end is the
+        rewrite. This is your &ldquo;real&rdquo; tool.
+      </p>
+      <p>
+        <strong>Month 4+:</strong> Sprinkle Option 10 (LLM-first) on top of whatever you built &mdash;
+        Claude-generated cluster labels, Claude-generated cross-level annotations, Claude-written
+        &ldquo;here&rsquo;s what this region is&rdquo; captions.
+      </p>
+    </div>
+
+    <h3>Three questions to decide between these paths</h3>
+    <ol style="margin: 1.5rem 0; padding-left: 1.5rem; line-height: 1.8;">
+      <li>
+        <strong>How often will your corpus change?</strong> Hourly &rarr; need a running backend (02, 10, 12).
+        Weekly or slower &rarr; static (01, 04, 09) wins.
+      </li>
+      <li>
+        <strong>Does this need to be shareable?</strong> Public web &rarr; any of 01&ndash;07, 09&ndash;12. Just
+        for you &rarr; Option 08 becomes very appealing.
+      </li>
+      <li>
+        <strong>What matters most in the first screen?</strong> Readability &rarr; 04, 07. Density / scale
+        &rarr; 02, 06. Awe &rarr; 05, 06. Interactivity &rarr; 02, 03.
+      </li>
+    </ol>
+
+    <div class="callout">
+      <div class="callout-title">A closing thought from this whole survey</div>
+      <p>
+        The genre has been invented. The tools are all here. What doesn&rsquo;t exist yet is your
+        particular synthesis &mdash; embedding space + explicit graph + multi-entity types + editable +
+        deployed + with your aesthetic. That&rsquo;s the gap this site was assembled to help you close.
+        None of the options above will build themselves. But each is a real, walked path &mdash; with
+        collaborators, documentation, and examples you can read.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <p class="footer-title">Ways of Thinking Through Things</p>
+    <p class="footer-body">
+      Assembled April 2026 for Douglas McGowan, UC Berkeley Research. A reference built as a reference &mdash;
+      this site is itself a (very simple) instance of the genre it surveys.
+    </p>
+    <p class="footer-body">
+      Every linked work belongs to its creator. This page exists to point at their work, not replace it.
+    </p>
+    <p class="footer-small">
+      14 sections · ~200 linked sources · built from scratch, no frameworks · dark mode only
+    </p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
