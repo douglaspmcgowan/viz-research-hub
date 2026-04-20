@@ -9,7 +9,19 @@
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
   let w, h, stars;
-  const STAR_COUNT = 220;
+  const isMobile = window.matchMedia('(max-width: 640px)').matches;
+  const STAR_COUNT = isMobile ? 90 : 220;
+
+  let starColor = '210, 220, 240';
+  let warmColor = '232, 184, 92';
+
+  function readThemeColors() {
+    const styles = getComputedStyle(document.documentElement);
+    const sc = styles.getPropertyValue('--star-color').trim();
+    const wc = styles.getPropertyValue('--star-warm').trim();
+    if (sc) starColor = sc;
+    if (wc) warmColor = wc;
+  }
 
   function resize() {
     w = canvas.width = window.innerWidth;
@@ -21,8 +33,8 @@
       a: Math.random() * 0.5 + 0.2,
       vx: (Math.random() - 0.5) * 0.02,
       vy: (Math.random() - 0.5) * 0.02,
-      tw: Math.random() * Math.PI * 2,  // twinkle phase
-      tws: 0.01 + Math.random() * 0.02   // twinkle speed
+      tw: Math.random() * Math.PI * 2,
+      tws: 0.01 + Math.random() * 0.02
     }));
   }
 
@@ -38,15 +50,14 @@
       const a = s.a * twinkle;
       ctx.beginPath();
       ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-      // warm vs cool stars
       const warm = (s.r > 1);
       ctx.fillStyle = warm
-        ? `rgba(232, 184, 92, ${a})`
-        : `rgba(210, 220, 240, ${a})`;
+        ? `rgba(${warmColor}, ${a})`
+        : `rgba(${starColor}, ${a})`;
       ctx.fill();
       if (s.r > 1) {
         const g = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.r * 5);
-        g.addColorStop(0, `rgba(232, 184, 92, ${a * 0.3})`);
+        g.addColorStop(0, `rgba(${warmColor}, ${a * 0.3})`);
         g.addColorStop(1, 'rgba(0,0,0,0)');
         ctx.fillStyle = g;
         ctx.fillRect(s.x - s.r * 5, s.y - s.r * 5, s.r * 10, s.r * 10);
@@ -55,9 +66,32 @@
     requestAnimationFrame(frame);
   }
 
+  readThemeColors();
   resize();
   window.addEventListener('resize', resize);
+  window.addEventListener('themechange', readThemeColors);
   requestAnimationFrame(frame);
+})();
+
+// ── Theme toggle ─────────────────────────────────────────────────
+(function themeToggle() {
+  const btn = document.querySelector('.theme-toggle');
+  if (!btn) return;
+  const root = document.documentElement;
+
+  function update() {
+    const current = root.getAttribute('data-theme') || 'dark';
+    btn.setAttribute('aria-pressed', current === 'light' ? 'true' : 'false');
+  }
+  update();
+
+  btn.addEventListener('click', () => {
+    const next = (root.getAttribute('data-theme') === 'light') ? 'dark' : 'light';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('theme', next); } catch (e) {}
+    update();
+    window.dispatchEvent(new CustomEvent('themechange', { detail: { theme: next } }));
+  });
 })();
 
 // ── Active nav on scroll ─────────────────────────────────────────
